@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://o1jeu63no2yo" path="res://views/editor/editor.gd" id="1_hjfbv"]
 [ext_resource type="PackedScene" uid="uid://ca1h0fih55p5l" path="res://system/canvas/canvas.tscn" id="2_uvf6n"]
 [ext_resource type="PackedScene" uid="uid://cj0amp2lxwem5" path="res://views/editor/containers/page_controls/page_controls.tscn" id="3_3o6tv"]
+[ext_resource type="Script" uid="uid://dg2xr82qtamwp" path="res://system/playback/playback_manager.gd" id="4_uvf6n"]
 
 [node name="Editor" type="Control" unique_id=1442565710]
 layout_mode = 3
@@ -30,13 +31,14 @@ render_target_update_mode = 4
 [node name="Canvas" parent="CanvasContainer/CanvasViewport" unique_id=502353309 instance=ExtResource("2_uvf6n")]
 
 [node name="PageControls" parent="." unique_id=352413597 instance=ExtResource("3_3o6tv")]
-custom_minimum_size = Vector2(0, 28)
+custom_minimum_size = Vector2(0, 32)
 layout_mode = 1
 anchors_preset = 12
 anchor_top = 1.0
 grow_vertical = 0
 
-[connection signal="framerate_change" from="PageControls" to="." method="_on_framerate_change"]
-[connection signal="load_call" from="PageControls" to="." method="_load_project"]
+[node name="PlaybackManager" type="Node" parent="." unique_id=1433802849]
+script = ExtResource("4_uvf6n")
+metadata/_custom_type_script = "uid://dg2xr82qtamwp"
+
 [connection signal="play_toggle" from="PageControls" to="." method="_play_toggle"]
-[connection signal="save_call" from="PageControls" to="." method="_save_project"]

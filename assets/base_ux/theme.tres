@@ -49,6 +49,9 @@ border_width_bottom = 2
 border_color = Color(0, 0.5803922, 1, 1)
 anti_aliasing = false
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m8jh7"]
+bg_color = Color(0.1497609, 0.28717783, 0.44712496, 0.39215687)
+
 [resource]
 Button/colors/font_color = Color(1, 1, 1, 1)
 Button/styles/disabled = SubResource("StyleBoxFlat_6j8ly")
@@ -57,3 +60,4 @@ Button/styles/hover_pressed = SubResource("StyleBoxFlat_dtpf4")
 Button/styles/normal = SubResource("StyleBoxFlat_31loe")
 Button/styles/pressed = SubResource("StyleBoxFlat_pchdo")
 ItemList/styles/panel = SubResource("StyleBoxFlat_xeq2n")
+Panel/styles/panel = SubResource("StyleBoxFlat_m8jh7")

@@ -7,12 +7,18 @@ var current_tool: Tool
 
 @onready var canvas = $CanvasContainer/CanvasViewport/Canvas
 @onready var page_controls = $PageControls
+@onready var playback_manager = $PlaybackManager
 
 func _ready() -> void:
 	project = Project.new()
 
 	page_controls.attach_project(project)
 	canvas.attach_project(project)
+	playback_manager.attach_project(project)
+
+	page_controls.play_toggle.connect(
+		func(): playback_manager.is_playing = !playback_manager.is_playing
+		)
 
 	project.new_project(256, 192)
 
@@ -31,10 +37,3 @@ func _input(event: InputEvent) -> void:
 		elif event is InputEventMouseMotion:
 			if current_tool is Tool:
 				current_tool.on_pointer_move(canvas_pos, canvas)
-
-# Signal Forwarding
-func _next_page() -> void:
-	project.next_page(false)
-
-func _prev_page() -> void:
-	project.prev_page()

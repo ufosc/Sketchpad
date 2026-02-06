@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" uid="uid://fduhdjv3ekah" path="res://views/editor/containers/page_controls/page_controls.gd" id="1_8tmw1"]
 
-[node name="PageControls" type="Control" unique_id=352413597]
+[node name="PageControls" type="Control" unique_id=352413597 node_paths=PackedStringArray("next_page_button", "page_count_label", "prev_page_button", "framerate_slider", "framerate_label", "play_button", "save_button", "load_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -10,8 +10,24 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_8tmw1")
+next_page_button = NodePath("Panel/HBoxContainer/NextButton")
+page_count_label = NodePath("Panel/HBoxContainer/PageCount")
+prev_page_button = NodePath("Panel/HBoxContainer/PrevButton")
+framerate_slider = NodePath("Panel/HBoxContainer/FRContainer/FRSlider")
+framerate_label = NodePath("Panel/HBoxContainer/FRContainer/Framerate")
+play_button = NodePath("Panel/HBoxContainer/PlayButton")
+save_button = NodePath("Panel/HBoxContainer/SaveButton")
+load_button = NodePath("Panel/HBoxContainer/LoadButton")
 
-[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1697879641]
+[node name="Panel" type="Panel" parent="." unique_id=1178714550]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel" unique_id=1697879641]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -20,53 +36,55 @@ grow_horizontal = 2
 grow_vertical = 2
 alignment = 1
 
-[node name="PrevButton" type="Button" parent="HBoxContainer" unique_id=806348556]
+[node name="PrevButton" type="Button" parent="Panel/HBoxContainer" unique_id=806348556]
 layout_mode = 2
 text = "Previous Page"
 
-[node name="PageCount" type="Label" parent="HBoxContainer" unique_id=2038342360]
+[node name="PageCount" type="Label" parent="Panel/HBoxContainer" unique_id=2038342360]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 text = "1/1"
 horizontal_alignment = 1
 
-[node name="NextButton" type="Button" parent="HBoxContainer" unique_id=690276461]
+[node name="NextButton" type="Button" parent="Panel/HBoxContainer" unique_id=690276461]
 layout_mode = 2
 text = "Next Page"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer" unique_id=645195669]
+[node name="FRContainer" type="HBoxContainer" parent="Panel/HBoxContainer" unique_id=645195669]
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="HSlider" type="HSlider" parent="HBoxContainer/HBoxContainer" unique_id=1220768247]
+[node name="FRSlider" type="HSlider" parent="Panel/HBoxContainer/FRContainer" unique_id=1220768247]
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_vertical = 4
 min_value = 1.0
-max_value = 10.0
+max_value = 12.0
 value = 1.0
 rounded = true
 tick_count = 1
 
-[node name="Label" type="Label" parent="HBoxContainer/HBoxContainer" unique_id=2030443127]
+[node name="Framerate" type="Label" parent="Panel/HBoxContainer/FRContainer" unique_id=2030443127]
+custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 text = "1"
+horizontal_alignment = 1
 
-[node name="PlayButton" type="Button" parent="HBoxContainer" unique_id=488848150]
+[node name="PlayButton" type="Button" parent="Panel/HBoxContainer" unique_id=488848150]
 layout_mode = 2
 text = "Play"
 
-[node name="SaveButton" type="Button" parent="HBoxContainer" unique_id=1671480537]
+[node name="SaveButton" type="Button" parent="Panel/HBoxContainer" unique_id=1671480537]
 layout_mode = 2
 text = "Save"
 
-[node name="LoadButton" type="Button" parent="HBoxContainer" unique_id=926630555]
+[node name="LoadButton" type="Button" parent="Panel/HBoxContainer" unique_id=926630555]
 layout_mode = 2
 text = "Load"
 
-[connection signal="pressed" from="HBoxContainer/PrevButton" to="." method="_on_prev_button_pressed"]
-[connection signal="pressed" from="HBoxContainer/NextButton" to="." method="_on_next_button_pressed"]
-[connection signal="value_changed" from="HBoxContainer/HBoxContainer/HSlider" to="." method="_on_slider_value_changed"]
-[connection signal="pressed" from="HBoxContainer/PlayButton" to="." method="_on_play_pressed"]
-[connection signal="pressed" from="HBoxContainer/SaveButton" to="." method="_on_save_button_pressed"]
-[connection signal="pressed" from="HBoxContainer/LoadButton" to="." method="_on_load_button_pressed"]
+[connection signal="pressed" from="Panel/HBoxContainer/PrevButton" to="." method="_on_prev_button_pressed"]
+[connection signal="pressed" from="Panel/HBoxContainer/NextButton" to="." method="_on_next_button_pressed"]
+[connection signal="value_changed" from="Panel/HBoxContainer/FRContainer/FRSlider" to="." method="_on_slider_value_changed"]
+[connection signal="pressed" from="Panel/HBoxContainer/PlayButton" to="." method="_on_play_pressed"]
+[connection signal="pressed" from="Panel/HBoxContainer/SaveButton" to="." method="_on_save_button_pressed"]
+[connection signal="pressed" from="Panel/HBoxContainer/LoadButton" to="." method="_on_load_button_pressed"]

@@ -1,0 +1,38 @@
+name: "Validate"
+on: [push, pull_request]
+
+env:
+  GODOT_VERSION: 4.6
+  EXPORT_NAME: sketchpad
+  PROJECT_PATH: .
+
+jobs:
+  verify-code:
+    name: Verify and Test Code 
+    runs-on: ubuntu-24.04
+    container:
+      image: barichello/godot-ci:4.6
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+      - name: Setup
+        run: |
+          mkdir -v -p ~/.local/share/godot/export_templates/
+          mkdir -v -p ~/.config/
+          mv /root/.config/godot ~/.config/godot
+          mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+      - name: Check Code Formatting
+        run: |
+          python -m pip install 'gdtoolkit==4.*'
+          cd $PROJECT_PATH
+          gdlint $(find . -name "*.gd" -not -path "./addons/*")
+      - name: Run Unit Tests
+        run: |
+          cd $PROJECT_PATH
+          godot --headless --editor --quit --path "$PWD"
+          godot -d -s --headless --path "$PWD" addons/gut/gut_cmdln.gd

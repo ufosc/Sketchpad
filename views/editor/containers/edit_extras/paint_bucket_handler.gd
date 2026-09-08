@@ -6,7 +6,6 @@ extends PanelContainer
 @export var tool: PaintBucket
 
 var tolerance: float
-var fill_color: Color
 
 @onready var root: Node = get_tree().current_scene
 
@@ -14,8 +13,10 @@ var fill_color: Color
 func _ready() -> void:
 	color_picker.color_changed.connect(_on_color_changed)
 	tolerance_sldr.value_changed.connect(_on_tolerance_changed)
+	EditorState.color_changed.connect(_on_editor_color_changed)
 
 	tolerance_sldr.value = tolerance
+	color_picker.color = EditorState.color
 
 
 func _on_tolerance_changed(value: float) -> void:
@@ -25,5 +26,8 @@ func _on_tolerance_changed(value: float) -> void:
 
 
 func _on_color_changed(color: Color) -> void:
-	fill_color = color
-	tool.color = fill_color
+	EditorState.color = color
+
+
+func _on_editor_color_changed(value: Color) -> void:
+	color_picker.color = value

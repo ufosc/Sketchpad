@@ -3,7 +3,6 @@ extends Tool
 
 @export var title: String = "Paint Bucket"
 @export var tolerance: float
-@export var color: Color
 
 
 func _init() -> void:
@@ -20,15 +19,16 @@ func on_pointer_down(_position: Vector2, _canvas: Canvas) -> void:
 	var start_pos = Vector2i(_position)
 	var initial_color: Color = layer.get_pixelv(start_pos)
 	var initial_vector: Vector3 = Vector3(initial_color.r, initial_color.g, initial_color.b)
+	var fill_color: Color = EditorState.color
 
-	if initial_color == color:
+	if initial_color == fill_color:
 		return
 
 	var visited: Dictionary = {}
 	var pixels: Array[Vector2i] = [start_pos]
 	while !pixels.is_empty():
 		var pixel = pixels.pop_back()
-		layer.set_pixelv(pixel, color)
+		layer.set_pixelv(pixel, fill_color)
 		for d in directions:
 			var new_pixel = pixel + d
 

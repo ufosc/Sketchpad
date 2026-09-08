@@ -11,7 +11,6 @@ extends PanelContainer
 @export var tool: Brush
 @export var default_brush_width = 2.5
 @export var default_brush_hardness = 1.0
-@export var default_brush_color = Color.BLACK
 
 var brushes = [
 	load("res://tools/brush/big_circle/big_circle.tres"),
@@ -29,6 +28,7 @@ func _ready() -> void:
 	thick_sldr.value_changed.connect(_on_thickness_changed)
 	hard_sldr.value_changed.connect(_on_hardness_changed)
 	color_picker.color_changed.connect(_on_color_changed)
+	EditorState.color_changed.connect(_on_editor_color_changed)
 
 	for button in button_group.get_buttons():
 		button.pressed.connect(_on_filter_selected)
@@ -39,7 +39,8 @@ func _ready() -> void:
 	_on_brush_selected(0)
 	thick_sldr.value = default_brush_width
 	hard_sldr.value = default_brush_hardness
-	color_picker.color = default_brush_color
+	color_picker.color = EditorState.color
+
 
 func _on_thickness_changed(value: float) -> void:
 	thick_label.text = "%dpx" % value
@@ -53,13 +54,16 @@ func _on_hardness_changed(value: float) -> void:
 
 
 func _on_color_changed(color: Color) -> void:
-	tool.color = color
+	EditorState.color = color
+
+
+func _on_editor_color_changed(value: Color) -> void:
+	color_picker.color = value
 
 
 func _on_brush_selected(index: int) -> void:
 	brushes[index].hardness = tool.hardness
 	brushes[index].width = tool.width
-	brushes[index].color = tool.color
 	tool = brushes[index]
 	tool.stamp_tex = tool.generate_stamp()
 	editor.current_tool = tool

@@ -25,6 +25,7 @@ config/icon="uid://ftn5rtp15ap4"
 Consts="*uid://6e525ly3lg81"
 Toast="*uid://204dw8mixm7u"
 OptionDialog="*uid://cg2fe82sohpdu"
+EditorState="*uid://cxb1qthna1dmb"
 
 [display]
 

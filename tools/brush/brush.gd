@@ -6,7 +6,6 @@ extends Tool
 
 var width: float
 var hardness: float
-var color: Color
 var scaling_filter: Image.Interpolation
 var stamp_tex: Texture2D
 var _stroke_node: Node2D
@@ -83,7 +82,7 @@ func _place_stamp(_position: Vector2) -> void:
 	var s = Sprite2D.new()
 	s.texture = stamp_tex
 	s.position = _position
-	s.modulate = color
+	s.modulate = EditorState.color
 
 	var tex_w = float(stamp_tex.get_width())
 	var scale_factor = width / tex_w

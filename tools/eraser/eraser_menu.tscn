@@ -6,8 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://jfxxbdi7fdi2" path="res://tools/brush/big_semi_square/brush_template.png" id="4_xyeys"]
 [ext_resource type="Texture2D" uid="uid://cn802kqvyqt0m" path="res://tools/brush/big_square/brush_template.png" id="5_esoqk"]
 [ext_resource type="ButtonGroup" uid="uid://bmbn2jt3ookl" path="res://system/controls/scaling_filter_button_group_eraser.tres" id="6_rfsfp"]
-[ext_resource type="PackedScene" uid="uid://qlpnoyvxuh46" path="res://views/editor/containers/tool_manager/thickness_slider.tscn" id="7_xyeys"]
-[ext_resource type="PackedScene" uid="uid://bd7fuln4gepb6" path="res://views/editor/containers/tool_manager/hardness_slider.tscn" id="8_esoqk"]
+[ext_resource type="PackedScene" uid="uid://qlpnoyvxuh46" path="res://tools/eraser/widgets/thickness_slider.tscn" id="7_xyeys"]
+[ext_resource type="PackedScene" uid="uid://bd7fuln4gepb6" path="res://tools/eraser/widgets/hardness_slider.tscn" id="8_esoqk"]
 
 [node name="Eraser" type="PanelContainer" unique_id=1654936513 node_paths=PackedStringArray("thick_sldr", "thick_label", "hard_sldr", "hard_label", "eraser_list")]
 script = ExtResource("1_jxr3e")

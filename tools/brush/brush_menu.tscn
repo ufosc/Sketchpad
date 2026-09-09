@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dm0t60quyv3bj"]
 
-[ext_resource type="Script" uid="uid://dfxrwhc6j411j" path="res://views/editor/containers/edit_extras/brush_handler.gd" id="1_8f4qj"]
+[ext_resource type="Script" uid="uid://dfxrwhc6j411j" path="res://tools/brush/brush_handler.gd" id="1_8f4qj"]
 [ext_resource type="Texture2D" uid="uid://whaa4jwoxw6m" path="res://tools/brush/big_circle/brush_template.png" id="2_6f1ni"]
 [ext_resource type="Resource" uid="uid://cdg7du80bixpc" path="res://tools/brush/big_circle/big_circle.tres" id="3_781lx"]
 [ext_resource type="Texture2D" uid="uid://jfxxbdi7fdi2" path="res://tools/brush/big_semi_square/brush_template.png" id="3_iesae"]
@@ -11,9 +11,9 @@
 
 [node name="Brush" type="PanelContainer" unique_id=1654936513 node_paths=PackedStringArray("thick_sldr", "thick_label", "hard_sldr", "hard_label", "color_picker", "brush_list")]
 script = ExtResource("1_8f4qj")
-thick_sldr = NodePath("")
+thick_sldr = NodePath("Main Panel/Modifier/BrushSetting/TkSldrContainer/ThicknessSlider")
 thick_label = NodePath("Main Panel/Modifier/BrushSetting/TkSldrContainer/HBoxContainer/Value")
-hard_sldr = NodePath("")
+hard_sldr = NodePath("Main Panel/Modifier/BrushSetting/HdSldrContainer/HardnessSlider")
 hard_label = NodePath("Main Panel/Modifier/BrushSetting/HdSldrContainer/HBoxContainer/Value")
 color_picker = NodePath("Main Panel/Modifier/ColorHeader/ColorPickerButton")
 brush_list = NodePath("Main Panel/BrushesHeader/BrushList")

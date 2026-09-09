@@ -9,13 +9,14 @@ script = ExtResource("2_kndhl")
 tolerance = 5.0
 metadata/_custom_type_script = "uid://bkfy5dxh8w0kk"
 
-[node name="PaintBucket" type="PanelContainer" unique_id=1654936513 node_paths=PackedStringArray("tolerance_label", "color_picker")]
+[node name="PaintBucket" type="PanelContainer" unique_id=1654936513 node_paths=PackedStringArray("tolerance_sldr", "tolerance_label", "color_picker")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ueko8")
+tolerance_sldr = NodePath("Main Panel/Modifier/BrushSetting/TlSldrContainer/TolearnceSlider")
 tolerance_label = NodePath("Main Panel/Modifier/BrushSetting/TlSldrContainer/HBoxContainer/Value")
 color_picker = NodePath("Main Panel/Modifier/ColorHeader/ColorPickerButton")
 tool = SubResource("Resource_57axg")

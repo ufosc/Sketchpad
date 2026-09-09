@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://d0v3i8vgql1sj"]
 
-[ext_resource type="Script" uid="uid://daud6c6tisyx3" path="res://views/editor/containers/edit_extras/eraser_handler.gd" id="1_jxr3e"]
+[ext_resource type="Script" uid="uid://daud6c6tisyx3" path="res://tools/eraser/eraser_handler.gd" id="1_jxr3e"]
 [ext_resource type="Resource" uid="uid://y7djir36yiht" path="res://tools/eraser/big_circle/big_circle.tres" id="2_mkug3"]
 [ext_resource type="Texture2D" uid="uid://whaa4jwoxw6m" path="res://tools/brush/big_circle/brush_template.png" id="3_mkug3"]
 [ext_resource type="Texture2D" uid="uid://jfxxbdi7fdi2" path="res://tools/brush/big_semi_square/brush_template.png" id="4_xyeys"]
@@ -11,9 +11,9 @@
 
 [node name="Eraser" type="PanelContainer" unique_id=1654936513 node_paths=PackedStringArray("thick_sldr", "thick_label", "hard_sldr", "hard_label", "eraser_list")]
 script = ExtResource("1_jxr3e")
-thick_sldr = NodePath("")
+thick_sldr = NodePath("Main Panel/Modifier/EraserSetting/TkSldrContainer/ThicknessSlider")
 thick_label = NodePath("Main Panel/Modifier/EraserSetting/TkSldrContainer/HBoxContainer/Value")
-hard_sldr = NodePath("")
+hard_sldr = NodePath("Main Panel/Modifier/EraserSetting/HdSldrContainer/HardnessSlider")
 hard_label = NodePath("Main Panel/Modifier/EraserSetting/HdSldrContainer/HBoxContainer/Value")
 eraser_list = NodePath("Main Panel/ErasersHeader/ErasesrList")
 button_group = ExtResource("6_rfsfp")

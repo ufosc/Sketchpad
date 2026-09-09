@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://dpxmvb2d305l5"]
 
-[ext_resource type="Script" uid="uid://dlrm71q0flrum" path="res://views/editor/containers/edit_extras/paint_bucket_handler.gd" id="1_ueko8"]
-[ext_resource type="Script" uid="uid://bkfy5dxh8w0kk" path="res://tools/paint_bucket.gd" id="2_kndhl"]
+[ext_resource type="Script" uid="uid://dlrm71q0flrum" path="res://tools/paint_bucket/paint_bucket_handler.gd" id="1_ueko8"]
+[ext_resource type="Script" uid="uid://bkfy5dxh8w0kk" path="res://tools/paint_bucket/paint_bucket.gd" id="2_kndhl"]
 [ext_resource type="PackedScene" uid="uid://b5xysuscwt8p4" path="res://tools/paint_bucket/widgets/tolerance_slider.tscn" id="3_kndhl"]
 
 [sub_resource type="Resource" id="Resource_57axg"]
@@ -9,14 +9,13 @@ script = ExtResource("2_kndhl")
 tolerance = 5.0
 metadata/_custom_type_script = "uid://bkfy5dxh8w0kk"
 
-[node name="PaintBucket" type="PanelContainer" unique_id=1654936513 node_paths=PackedStringArray("tolerance_sldr", "tolerance_label", "color_picker")]
+[node name="PaintBucket" type="PanelContainer" unique_id=1654936513 node_paths=PackedStringArray("tolerance_label", "color_picker")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ueko8")
-tolerance_sldr = NodePath("")
 tolerance_label = NodePath("Main Panel/Modifier/BrushSetting/TlSldrContainer/HBoxContainer/Value")
 color_picker = NodePath("Main Panel/Modifier/ColorHeader/ColorPickerButton")
 tool = SubResource("Resource_57axg")

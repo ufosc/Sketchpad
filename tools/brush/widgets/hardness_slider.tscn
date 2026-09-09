@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://h3fgca6o0i8m"]
+
+[node name="HardnessSlider" type="HSlider" unique_id=1240724001]
+max_value = 1.0
+step = 0.01

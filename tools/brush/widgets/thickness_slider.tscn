@@ -1,0 +1,7 @@
+[gd_scene format=3 uid="uid://b8jaotf7y1i4s"]
+
+[node name="ThicknessSlider" type="HSlider" unique_id=1139794653]
+min_value = 1.0
+max_value = 50.0
+step = 0.1
+value = 1.0

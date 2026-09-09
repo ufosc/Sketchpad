@@ -6,12 +6,14 @@
 [ext_resource type="Texture2D" uid="uid://jfxxbdi7fdi2" path="res://tools/brush/big_semi_square/brush_template.png" id="3_iesae"]
 [ext_resource type="Texture2D" uid="uid://cn802kqvyqt0m" path="res://tools/brush/big_square/brush_template.png" id="4_781lx"]
 [ext_resource type="ButtonGroup" uid="uid://df7dnpesedrki" path="res://system/controls/scaling_filter_button_group.tres" id="5_6f1ni"]
+[ext_resource type="PackedScene" uid="uid://b8jaotf7y1i4s" path="res://tools/brush/widgets/thickness_slider.tscn" id="7_bq38f"]
+[ext_resource type="PackedScene" uid="uid://h3fgca6o0i8m" path="res://tools/brush/widgets/hardness_slider.tscn" id="8_4185b"]
 
 [node name="Brush" type="PanelContainer" unique_id=1654936513 node_paths=PackedStringArray("thick_sldr", "thick_label", "hard_sldr", "hard_label", "color_picker", "brush_list")]
 script = ExtResource("1_8f4qj")
-thick_sldr = NodePath("Main Panel/Modifier/BrushSetting/TkSldrContainer/ThicknessSlider")
+thick_sldr = NodePath("")
 thick_label = NodePath("Main Panel/Modifier/BrushSetting/TkSldrContainer/HBoxContainer/Value")
-hard_sldr = NodePath("Main Panel/Modifier/BrushSetting/HdSldrContainer/HardnessSlider")
+hard_sldr = NodePath("")
 hard_label = NodePath("Main Panel/Modifier/BrushSetting/HdSldrContainer/HBoxContainer/Value")
 color_picker = NodePath("Main Panel/Modifier/ColorHeader/ColorPickerButton")
 brush_list = NodePath("Main Panel/BrushesHeader/BrushList")
@@ -96,12 +98,8 @@ text = "Thickness:"
 layout_mode = 2
 text = "2.5px"
 
-[node name="ThicknessSlider" type="HSlider" parent="Main Panel/Modifier/BrushSetting/TkSldrContainer" unique_id=65607546]
+[node name="ThicknessSlider" parent="Main Panel/Modifier/BrushSetting/TkSldrContainer" unique_id=1139794653 instance=ExtResource("7_bq38f")]
 layout_mode = 2
-min_value = 1.0
-max_value = 50.0
-step = 0.1
-value = 1.0
 
 [node name="HdSldrContainer" type="VBoxContainer" parent="Main Panel/Modifier/BrushSetting" unique_id=2083122033]
 layout_mode = 2
@@ -117,10 +115,8 @@ text = "Hardness:"
 layout_mode = 2
 text = "0%"
 
-[node name="HardnessSlider" type="HSlider" parent="Main Panel/Modifier/BrushSetting/HdSldrContainer" unique_id=1560819494]
+[node name="HardnessSlider" parent="Main Panel/Modifier/BrushSetting/HdSldrContainer" unique_id=1240724001 instance=ExtResource("8_4185b")]
 layout_mode = 2
-max_value = 1.0
-step = 0.01
 
 [node name="VSeparator2" type="VSeparator" parent="Main Panel/Modifier" unique_id=900005814]
 layout_mode = 2

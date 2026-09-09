@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://dlrm71q0flrum" path="res://views/editor/containers/edit_extras/paint_bucket_handler.gd" id="1_ueko8"]
 [ext_resource type="Script" uid="uid://bkfy5dxh8w0kk" path="res://tools/paint_bucket.gd" id="2_kndhl"]
+[ext_resource type="PackedScene" uid="uid://b5xysuscwt8p4" path="res://tools/paint_bucket/widgets/tolerance_slider.tscn" id="3_kndhl"]
 
 [sub_resource type="Resource" id="Resource_57axg"]
 script = ExtResource("2_kndhl")
@@ -15,7 +16,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ueko8")
-tolerance_sldr = NodePath("Main Panel/Modifier/BrushSetting/TlSldrContainer/TolearnceSlider")
+tolerance_sldr = NodePath("")
 tolerance_label = NodePath("Main Panel/Modifier/BrushSetting/TlSldrContainer/HBoxContainer/Value")
 color_picker = NodePath("Main Panel/Modifier/ColorHeader/ColorPickerButton")
 tool = SubResource("Resource_57axg")
@@ -48,10 +49,8 @@ text = "Tolerance: "
 layout_mode = 2
 text = "0%"
 
-[node name="TolearnceSlider" type="HSlider" parent="Main Panel/Modifier/BrushSetting/TlSldrContainer" unique_id=1560819494]
+[node name="TolearnceSlider" parent="Main Panel/Modifier/BrushSetting/TlSldrContainer" unique_id=88929176 instance=ExtResource("3_kndhl")]
 layout_mode = 2
-max_value = 1.0
-step = 0.01
 
 [node name="VSeparator2" type="VSeparator" parent="Main Panel/Modifier" unique_id=900005814]
 layout_mode = 2

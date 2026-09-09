@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://b5xysuscwt8p4"]
+
+[node name="TolearnceSlider" type="HSlider" unique_id=88929176]
+max_value = 1.0
+step = 0.01

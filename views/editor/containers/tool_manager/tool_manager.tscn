@@ -3,7 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://dm0t60quyv3bj" path="res://tools/brush/brush_menu.tscn" id="1_omk8e"]
 [ext_resource type="Script" uid="uid://dmdsa85guxgav" path="res://views/editor/containers/tool_manager/tool_manager.gd" id="1_vjvnp"]
 [ext_resource type="PackedScene" uid="uid://dpxmvb2d305l5" path="res://tools/paint_bucket/paint_bucket_menu.tscn" id="2_voh52"]
-[ext_resource type="PackedScene" uid="uid://d0v3i8vgql1sj" path="res://views/editor/containers/tool_manager/eraser_menu.tscn" id="4_1gcu4"]
+[ext_resource type="PackedScene" uid="uid://d0v3i8vgql1sj" path="res://tools/eraser/eraser_menu.tscn" id="4_1gcu4"]
 [ext_resource type="PackedScene" uid="uid://cqm4tsb4pn43x" path="res://tools/dragger/dragger_menu.tscn" id="5_exmo2"]
 
 [sub_resource type="ButtonGroup" id="ButtonGroup_exmo2"]

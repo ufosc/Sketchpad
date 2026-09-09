@@ -6,12 +6,14 @@
 [ext_resource type="Texture2D" uid="uid://jfxxbdi7fdi2" path="res://tools/brush/big_semi_square/brush_template.png" id="4_xyeys"]
 [ext_resource type="Texture2D" uid="uid://cn802kqvyqt0m" path="res://tools/brush/big_square/brush_template.png" id="5_esoqk"]
 [ext_resource type="ButtonGroup" uid="uid://bmbn2jt3ookl" path="res://system/controls/scaling_filter_button_group_eraser.tres" id="6_rfsfp"]
+[ext_resource type="PackedScene" uid="uid://qlpnoyvxuh46" path="res://views/editor/containers/tool_manager/thickness_slider.tscn" id="7_xyeys"]
+[ext_resource type="PackedScene" uid="uid://bd7fuln4gepb6" path="res://views/editor/containers/tool_manager/hardness_slider.tscn" id="8_esoqk"]
 
 [node name="Eraser" type="PanelContainer" unique_id=1654936513 node_paths=PackedStringArray("thick_sldr", "thick_label", "hard_sldr", "hard_label", "eraser_list")]
 script = ExtResource("1_jxr3e")
-thick_sldr = NodePath("Main Panel/Modifier/EraserSetting/TkSldrContainer/ThicknessSlider")
+thick_sldr = NodePath("")
 thick_label = NodePath("Main Panel/Modifier/EraserSetting/TkSldrContainer/HBoxContainer/Value")
-hard_sldr = NodePath("Main Panel/Modifier/EraserSetting/HdSldrContainer/HardnessSlider")
+hard_sldr = NodePath("")
 hard_label = NodePath("Main Panel/Modifier/EraserSetting/HdSldrContainer/HBoxContainer/Value")
 eraser_list = NodePath("Main Panel/ErasersHeader/ErasesrList")
 button_group = ExtResource("6_rfsfp")
@@ -95,12 +97,8 @@ text = "Thickness:"
 layout_mode = 2
 text = "2.5px"
 
-[node name="ThicknessSlider" type="HSlider" parent="Main Panel/Modifier/EraserSetting/TkSldrContainer" unique_id=65607546]
+[node name="ThicknessSlider" parent="Main Panel/Modifier/EraserSetting/TkSldrContainer" unique_id=1668743978 instance=ExtResource("7_xyeys")]
 layout_mode = 2
-min_value = 1.0
-max_value = 50.0
-step = 0.1
-value = 1.0
 
 [node name="HdSldrContainer" type="VBoxContainer" parent="Main Panel/Modifier/EraserSetting" unique_id=2083122033]
 layout_mode = 2
@@ -116,10 +114,8 @@ text = "Hardness:"
 layout_mode = 2
 text = "0%"
 
-[node name="HardnessSlider" type="HSlider" parent="Main Panel/Modifier/EraserSetting/HdSldrContainer" unique_id=1560819494]
+[node name="HardnessSlider" parent="Main Panel/Modifier/EraserSetting/HdSldrContainer" unique_id=871359269 instance=ExtResource("8_esoqk")]
 layout_mode = 2
-max_value = 1.0
-step = 0.01
 
 [node name="VSeparator2" type="VSeparator" parent="Main Panel/Modifier" unique_id=900005814]
 layout_mode = 2

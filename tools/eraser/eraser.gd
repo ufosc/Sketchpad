@@ -12,6 +12,10 @@ var _last_pos: Vector2
 var _has_last = false
 
 
+func _init() -> void:
+	cursor = load("res://tools/eraser/cursor.png")
+
+
 func _ready() -> void:
 	filter = generate_filter()
 

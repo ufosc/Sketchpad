@@ -13,6 +13,10 @@ var _last_pos: Vector2
 var _has_last = false
 
 
+func _init() -> void:
+	cursor = load("res://tools/brush/cursor.png")
+
+
 func _ready() -> void:
 	stamp_tex = generate_stamp()
 

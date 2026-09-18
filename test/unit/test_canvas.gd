@@ -58,6 +58,28 @@ func test_canvas_set_onion_skin_depth_works():
 	canvas.set_onion_skin_depth(0)
 	assert_eq(renderer.depth, 1, "Depth should never be lower than 1")
 
+
+func test_set_tool_cursor_uses_tool_cursor_texture():
+	var brush := Brush.new()
+	canvas.set_tool_cursor(brush)
+
+	assert_eq(
+		canvas.control_node.mouse_default_cursor_shape,
+		Control.CURSOR_CROSS,
+		"Canvas should switch to the custom cursor shape when a tool has a cursor texture"
+	)
+
+
+func test_set_tool_cursor_falls_back_to_arrow_without_cursor_texture():
+	var tool := Tool.new()
+	canvas.set_tool_cursor(tool)
+
+	assert_eq(
+		canvas.control_node.mouse_default_cursor_shape,
+		Control.CURSOR_ARROW,
+		"Canvas should fall back to the arrow cursor when the tool has no cursor texture"
+	)
+
 # TODO - Create unit tests and investigate GUT and RenderingServer issues.
 # func test_bake():
 # 	var rect = ColorRect.new()

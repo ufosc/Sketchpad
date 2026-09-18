@@ -7,6 +7,7 @@ extends Tool
 
 func _init() -> void:
 	name = "Paint Bucket"
+	cursor = load("res://tools/paint_bucket/cursor.png")
 
 
 func on_pointer_down(_position: Vector2, _canvas: Canvas) -> void:

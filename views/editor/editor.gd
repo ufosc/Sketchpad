@@ -8,7 +8,10 @@ extends Node
 
 var project: Project
 var current_page: Page
-var current_tool: Tool
+var current_tool: Tool:
+	set(value):
+		current_tool = value
+		canvas.set_tool_cursor(value)
 
 
 func _ready() -> void:

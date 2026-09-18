@@ -10,6 +10,7 @@ var _layer_image: Image = null
 
 func _init() -> void:
 	name = "Dragger"
+	cursor = load("res://tools/dragger/cursor.png")
 
 func on_pointer_down(_position: Vector2, _canvas: Canvas) -> void:
 	if not _canvas or not _canvas._project:

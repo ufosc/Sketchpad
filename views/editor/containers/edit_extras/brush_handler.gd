@@ -64,7 +64,6 @@ func _on_brush_selected(index: int) -> void:
 	tool.stamp_tex = tool.generate_stamp()
 	editor.current_tool = tool
 
-
 func _on_filter_selected() -> void:
 	var button = button_group.get_pressed_button()
 

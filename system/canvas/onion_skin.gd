@@ -38,7 +38,8 @@ func render() -> void:
 
 func _add_frame(page: Page, opacity: float) -> void:
 	var textures = page.get_content()
-	for texture in textures:
+	for i in range(1, textures.size()):
+		var texture = textures[i]
 		var sprite = Sprite2D.new()
 		sprite.centered = false
 		sprite.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST

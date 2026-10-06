@@ -11,6 +11,7 @@ signal tool_changed(tool: Tool)
 
 var project: Project
 var current_page: Page
+var history := History.new()
 var current_tool: Tool:
 	set(value):
 		current_tool = value
@@ -37,6 +38,7 @@ func new_project() -> void:
 ## Loads a provided [param project] into the editor.
 func load_project(p: Project) -> void:
 	project = p
+	history = History.new()
 	page_controls.attach_project(project)
 	canvas.attach_project(project)
 	playback_manager.attach_project(project)
@@ -58,9 +60,20 @@ func _handle_canvas_input(event: InputEvent) -> void:
 			if event.button_index == MOUSE_BUTTON_LEFT:
 				if current_tool is Tool:
 					if event.pressed:
+						history.save_state(project)
 						current_tool.on_pointer_down(canvas_pos, canvas)
 					else:
 						current_tool.on_pointer_up(canvas_pos, canvas)
 		elif event is InputEventMouseMotion:
 			if current_tool is Tool:
 				current_tool.on_pointer_move(canvas_pos, canvas)
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed and not event.echo:
+		var command_or_ctrl_pressed = event.ctrl_pressed or event.meta_pressed
+		if command_or_ctrl_pressed and event.keycode == KEY_Z and not event.shift_pressed:
+			if not project or canvas.dynamic_node.get_child_count() > 0:
+				return
+			if history.undo(project):
+				get_viewport().set_input_as_handled()

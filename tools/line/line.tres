@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="LineTool" format=3 uid="uid://co6jolm70txqb"]
+
+[ext_resource type="Texture2D" uid="uid://bmuneafjlaote" path="res://assets/icons/line.png" id="1_5vm7q"]
+[ext_resource type="Script" uid="uid://ca1ycla8jmq1k" path="res://tools/line/line.gd" id="1_schfm"]
+[ext_resource type="PackedScene" uid="uid://cwi0viffjfucu" path="res://tools/line/line_menu.tscn" id="1_tk5an"]
+
+[resource]
+script = ExtResource("1_schfm")
+name = "Line"
+icon = ExtResource("1_5vm7q")
+handler = ExtResource("1_tk5an")
+metadata/_custom_type_script = "uid://ca1ycla8jmq1k"

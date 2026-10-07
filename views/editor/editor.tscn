@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://d3qj36conyfim" path="res://views/menu/menu.tscn" id="6_o0wpe"]
 [ext_resource type="Resource" uid="uid://bd0lp47175we2" path="res://tools/dragger/dragger.tres" id="7_1733i"]
 [ext_resource type="PackedScene" uid="uid://cjepwvluuh3cc" path="res://views/editor/containers/toolbar/toolbar.tscn" id="8_rpm6l"]
+[ext_resource type="Resource" uid="uid://co6jolm70txqb" path="res://tools/line/line.tres" id="8_yydx7"]
 
 [node name="Editor" type="Control" unique_id=1442565710 node_paths=PackedStringArray("canvas", "page_controls", "playback_manager", "edit_extras", "toolset")]
 layout_mode = 3
@@ -32,7 +33,7 @@ toolset = NodePath("Toolset")
 
 [node name="Toolset" type="Node" parent="." unique_id=206351235]
 script = ExtResource("2_1hrb2")
-tools = Array[ExtResource("3_1733i")]([ExtResource("4_1733i"), ExtResource("5_yydx7"), ExtResource("6_1hrb2"), ExtResource("7_1733i")])
+tools = Array[ExtResource("3_1733i")]([ExtResource("4_1733i"), ExtResource("5_yydx7"), ExtResource("6_1hrb2"), ExtResource("7_1733i"), ExtResource("8_yydx7")])
 metadata/_custom_type_script = "uid://dbeqk07j0pwl7"
 
 [node name="CanvasContainer" type="SubViewportContainer" parent="." unique_id=1491532430]

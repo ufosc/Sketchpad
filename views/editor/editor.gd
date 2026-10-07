@@ -16,6 +16,8 @@ var current_tool: Tool:
 		current_tool = value
 		tool_changed.emit(value)
 
+var undo_stack: Array = []
+const MAX_UNDO_STEPS: int = 20
 
 func _ready() -> void:
 	canvas.canvas_input.connect(_handle_canvas_input)
@@ -51,6 +53,12 @@ func unload_project() -> void:
 	load_project(null)
 
 
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed:
+		if event.keycode == KEY_Z and event.is_command_or_control_pressed():
+			_undo_last_action()
+
+
 func _handle_canvas_input(event: InputEvent) -> void:
 	if event is InputEventMouse:
 		var canvas_pos = canvas.dynamic_node.get_local_mouse_position()
@@ -58,9 +66,40 @@ func _handle_canvas_input(event: InputEvent) -> void:
 			if event.button_index == MOUSE_BUTTON_LEFT:
 				if current_tool is Tool:
 					if event.pressed:
+						_save_canvas_state()
 						current_tool.on_pointer_down(canvas_pos, canvas)
 					else:
 						current_tool.on_pointer_up(canvas_pos, canvas)
 		elif event is InputEventMouseMotion:
 			if current_tool is Tool:
 				current_tool.on_pointer_move(canvas_pos, canvas)
+
+
+func _save_canvas_state() -> void:
+	if not project:
+		return
+		
+	var page = project.get_current_page()
+	var state_copy: Array = []
+	
+	for layer in page.layers:
+		state_copy.append(layer.duplicate())
+		
+	undo_stack.append(state_copy)
+	
+	if undo_stack.size() > MAX_UNDO_STEPS:
+		undo_stack.pop_front()
+
+
+func _undo_last_action() -> void:
+	if undo_stack.is_empty() or not project:
+		return
+		
+	var previous_state = undo_stack.pop_back()
+	var page = project.get_current_page()
+	
+	for i in range(page.layers.size()):
+		if i < previous_state.size():
+			page.layers[i].copy_from(previous_state[i])
+			
+	canvas.render_page(page)

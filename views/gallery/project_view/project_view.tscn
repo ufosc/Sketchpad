@@ -87,7 +87,7 @@ label_settings = SubResource("LabelSettings_5slws")
 
 [node name="Separator" type="Label" parent="VBoxContainer/HeaderBar/MarginContainer/VBoxContainer/HBoxContainer" unique_id=231740594]
 layout_mode = 2
-text = "●"
+text = "|"
 label_settings = SubResource("LabelSettings_5slws")
 
 [node name="FrameLabel" type="Label" parent="VBoxContainer/HeaderBar/MarginContainer/VBoxContainer/HBoxContainer" unique_id=1208078054]

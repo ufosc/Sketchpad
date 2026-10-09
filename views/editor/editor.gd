@@ -50,6 +50,15 @@ func unload_project() -> void:
 	playback_manager.pause()
 	load_project(null)
 
+func _unhandled_key_input(event: InputEvent) -> void:
+	if project == null or not event.is_pressed() or event.is_echo():
+		return
+	for tool in toolset.tools:
+		var action := tool.name.replace(" ", "")
+		if InputMap.has_action(action) and event.is_action_pressed(action, false, true):
+			current_tool = tool
+			get_viewport().set_input_as_handled()
+			return
 
 func _handle_canvas_input(event: InputEvent) -> void:
 	if event is InputEventMouse:

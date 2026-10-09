@@ -1,0 +1,95 @@
+[gd_scene format=3 uid="uid://bmk7iadgvuk0l"]
+
+[ext_resource type="Script" uid="uid://cuvb2ry2hu7ws" path="res://shortcuts.gd" id="1_0t4dy"]
+
+[node name="Shortcuts" type="Control" unique_id=1959400162]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_0t4dy")
+
+[node name="Label" type="Label" parent="." unique_id=1497223165]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -252.5
+offset_top = -23.0
+offset_right = 252.5
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Default Configs: Brush (B), Eraser (E), Paint Bucket (P), Dragger (D)"
+horizontal_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=365193453]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -55.0
+offset_top = -52.0
+offset_right = 55.0
+offset_bottom = 52.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HBoxBrush" type="HBoxContainer" parent="VBoxContainer" unique_id=1513981974]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxBrush" unique_id=508319792]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Brush"
+horizontal_alignment = 1
+
+[node name="Brush" type="Button" parent="VBoxContainer/HBoxBrush" unique_id=428695123]
+layout_mode = 2
+
+[node name="HBoxEraser" type="HBoxContainer" parent="VBoxContainer" unique_id=1946991071]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxEraser" unique_id=1212630590]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Eraser"
+horizontal_alignment = 1
+
+[node name="Eraser" type="Button" parent="VBoxContainer/HBoxEraser" unique_id=1056433864]
+layout_mode = 2
+
+[node name="HBoxPaintBucket" type="HBoxContainer" parent="VBoxContainer" unique_id=300527672]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxPaintBucket" unique_id=247616504]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Paint Bucket"
+horizontal_alignment = 1
+
+[node name="PaintBucket" type="Button" parent="VBoxContainer/HBoxPaintBucket" unique_id=59438904]
+layout_mode = 2
+
+[node name="HBoxDragger" type="HBoxContainer" parent="VBoxContainer" unique_id=2100953156]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="VBoxContainer/HBoxDragger" unique_id=2134222850]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Dragger"
+horizontal_alignment = 1
+
+[node name="Dragger" type="Button" parent="VBoxContainer/HBoxDragger" unique_id=626468485]
+layout_mode = 2
+
+[connection signal="pressed" from="VBoxContainer/HBoxBrush/Brush" to="." method="_on_brush_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxEraser/Eraser" to="." method="_on_eraser_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxPaintBucket/PaintBucket" to="." method="_on_paint_bucket_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxDragger/Dragger" to="." method="_on_dragger_pressed"]

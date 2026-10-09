@@ -3,7 +3,7 @@ extends Tool
 
 @export var title: String = "Eraser"
 @export var original_stamp: Texture2D = PlaceholderTexture2D.new()
-var width: float = 2.5
+var width: int = 3
 var hardness: float = 1.0
 var scaling_filter: Image.Interpolation
 var filter: Texture2D
@@ -30,12 +30,13 @@ func on_pointer_move(_position: Vector2, _canvas: Canvas) -> void:
 	var dist = delta.length()
 	var dir = delta / dist
 
+	var step = float(width) / filter.get_width() * 10
 	var t = 0.0
 	while t <= dist:
-		if (dir * t).length() > (width / filter.get_width() * 10):
+		if (dir * t).length() > step:
 			_place_stamp(_last_pos + dir * t, _canvas)
 			_last_pos = _position
-		t += (width / filter.get_width() * 10)
+		t += step
 
 
 func on_pointer_up(_position: Vector2, _canvas: Canvas) -> void:
@@ -79,8 +80,8 @@ func _place_stamp(_position: Vector2, _canvas: Canvas) -> void:
 	var scale_factor = width / tex_w
 	var img = filter.get_image()
 	img.resize(
-		filter.get_width() * scale_factor,
-		filter.get_height() * scale_factor,
+		max(1, int(filter.get_width() * scale_factor)),
+		max(1, int(filter.get_height() * scale_factor)),
 		Image.INTERPOLATE_LANCZOS
 	)
 

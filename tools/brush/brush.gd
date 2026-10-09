@@ -4,7 +4,7 @@ extends Tool
 @export var title: String = "Brush"
 @export var original_stamp: Texture2D = PlaceholderTexture2D.new()
 
-var width: float = 2.5
+var width: int = 3
 var hardness: float = 1.0
 var scaling_filter: Image.Interpolation
 var stamp_tex: Texture2D
@@ -32,12 +32,13 @@ func on_pointer_move(_position: Vector2, _canvas: Canvas) -> void:
 	var dist = delta.length()
 	var dir = delta / dist
 
+	var step = float(width) / stamp_tex.get_width() * 10
 	var t = 0.0
 	while t <= dist:
-		if (dir * t).length() > (width / stamp_tex.get_width() * 10):
+		if (dir * t).length() > step:
 			_place_stamp(_last_pos + dir * t)
 			_last_pos = _position
-		t += (width / stamp_tex.get_width() * 10)
+		t += step
 
 
 func on_pointer_up(_position: Vector2, _canvas: Canvas) -> void:

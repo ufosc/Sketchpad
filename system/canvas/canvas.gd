@@ -1,10 +1,10 @@
 class_name Canvas
 extends Node2D
 
-signal canvas_input(event: InputEventMouse)
+signal canvas_input(event: InputEvent)
 
 @export var camera_movable: bool = false
-@export var camera: Camera2D
+@export var camera: CanvasCamera
 
 var _project: Project
 

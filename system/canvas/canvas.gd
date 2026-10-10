@@ -7,6 +7,8 @@ signal canvas_input(event: InputEvent)
 @export var camera: CanvasCamera
 
 var _project: Project
+var undo_stack: Array = []
+const MAX_UNDO_STATES: int = 20
 
 @onready var control_node: Control = $Control
 @onready var layers_node: Node2D = $Control/Layers
@@ -97,6 +99,11 @@ func bake_page() -> void:
 			image_to_bake.set_pixel(x, y, c)
 
 	var layer_image = current_page.layers[current_layer]
+
+	undo_stack.append(layer_image.duplicate())
+	if undo_stack.size() > MAX_UNDO_STATES:
+		undo_stack.pop_front()
+
 	layer_image.blend_rect(
 		image_to_bake, Rect2(Vector2.ZERO, image_to_bake.get_size()), Vector2.ZERO
 	)
@@ -117,3 +124,17 @@ func bake_page() -> void:
 
 func _on_gui_input(event: InputEvent) -> void:
 	canvas_input.emit(event)
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event is InputEventKey and event.pressed and not event.echo:
+		if event.keycode == KEY_Z and (event.ctrl_pressed or event.meta_pressed):
+			if not undo_stack.is_empty():
+				var previous_image = undo_stack.pop_back()
+				var current_page = _project.frames[_project.current_frame]
+				var current_layer = _project.current_layer
+
+				current_page.set_layer(current_layer, previous_image)
+				_project.get_current_page()
+				render_page(current_page)
+				get_viewport().set_input_as_handled()

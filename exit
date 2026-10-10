@@ -1,0 +1,75 @@
+[1mdiff --git a/project.godot b/project.godot[m
+[1mindex 4e2422f..b935152 100644[m
+[1m--- a/project.godot[m
+[1m+++ b/project.godot[m
+[36m@@ -13,7 +13,7 @@[m [mconfig_version=5[m
+ config/name="Sketchpad"[m
+ config/version="v0.0.2"[m
+ run/main_scene="uid://bhgj2qy6e3eb5"[m
+[31m-config/features=PackedStringArray("4.6")[m
+[32m+[m[32mconfig/features=PackedStringArray("4.7")[m
+ boot_splash/bg_color=Color(1, 1, 1, 1)[m
+ boot_splash/show_image=false[m
+ boot_splash/use_filter=false[m
+[36m@@ -26,6 +26,7 @@[m [mConsts="*uid://6e525ly3lg81"[m
+ Toast="*uid://204dw8mixm7u"[m
+ OptionDialog="*uid://cg2fe82sohpdu"[m
+ EditorState="*uid://cxb1qthna1dmb"[m
+[32m+[m[32mCursorManager="*uid://bmlcb64msv3xo"[m
+ [m
+ [display][m
+ [m
+[1mdiff --git a/system/canvas/canvas.tscn b/system/canvas/canvas.tscn[m
+[1mindex 81aaa4a..0f917f9 100644[m
+[1m--- a/system/canvas/canvas.tscn[m
+[1m+++ b/system/canvas/canvas.tscn[m
+[36m@@ -25,6 +25,7 @@[m [moffset_right = 20.0[m
+ offset_bottom = 20.0[m
+ grow_horizontal = 2[m
+ grow_vertical = 2[m
+[32m+[m[32mmouse_default_cursor_shape = 3[m
+ [m
+ [node name="Layers" type="Node2D" parent="Control" unique_id=760557918][m
+ [m
+[1mdiff --git a/views/editor/containers/toolbar/toolbar.gd b/views/editor/containers/toolbar/toolbar.gd[m
+[1mindex d8bcd61..aeb3cb2 100644[m
+[1m--- a/views/editor/containers/toolbar/toolbar.gd[m
+[1m+++ b/views/editor/containers/toolbar/toolbar.gd[m
+[36m@@ -8,6 +8,7 @@[m [mfunc assign_tool(tool: Tool) -> void:[m
+ 	editor.current_tool = tool[m
+ [m
+ func _ready() -> void:[m
+[32m+[m	[32meditor.tool_changed.connect(_on_tool_change)[m
+ 	for tool in editor.toolset.tools:[m
+ 		var button = Button.new()[m
+ 		button.icon = tool.icon[m
+[36m@@ -23,3 +24,17 @@[m [mfunc _tool_selected(tool: Tool) -> void:[m
+ 		editor.edit_extras.open()[m
+ 	else:[m
+ 		editor.current_tool = tool[m
+[32m+[m
+[32m+[m[32mfunc _on_tool_change(tool: Tool) -> void:[m
+[32m+[m	[32mif tool is Brush:[m
+[32m+[m		[32mInput.set_custom_mouse_cursor(load('res://tools/brush/crosshair.png'),[m
+[32m+[m											[32mInput.CURSOR_CROSS, Vector2(8, 8))[m
+[32m+[m	[32melif tool is Eraser:[m
+[32m+[m		[32mInput.set_custom_mouse_cursor(load('res://tools/eraser/crosshair.png'),[m
+[32m+[m											[32mInput.CURSOR_CROSS, Vector2(8, 8))[m
+[32m+[m	[32melif tool is Dragger:[m
+[32m+[m		[32mInput.set_custom_mouse_cursor(load('res://tools/dragger/dragger.png'),[m
+[32m+[m											[32mInput.CURSOR_CROSS, Vector2(8, 8))[m
+[32m+[m	[32melif tool is PaintBucket:[m
+[32m+[m		[32mInput.set_custom_mouse_cursor(load('res://tools/paint_bucket/paint_bucket.png'),[m
+[32m+[m											[32mInput.CURSOR_CROSS, Vector2(8, 8))[m
+[1mdiff --git a/views/editor/editor.tscn b/views/editor/editor.tscn[m
+[1mindex 2057d79..0689515 100644[m
+[1m--- a/views/editor/editor.tscn[m
+[1m+++ b/views/editor/editor.tscn[m
+[36m@@ -42,6 +42,7 @@[m [manchor_right = 1.0[m
+ anchor_bottom = 1.0[m
+ grow_horizontal = 2[m
+ grow_vertical = 2[m
+[32m+[m[32mmouse_default_cursor_shape = 3[m
+ stretch = true[m
+ [m
+ [node name="CanvasViewport" type="SubViewport" parent="CanvasContainer" unique_id=54799112][m

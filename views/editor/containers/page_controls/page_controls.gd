@@ -24,6 +24,9 @@ signal onion_skin_toggle
 @export var onion_on_icon: Texture2D
 @export var onion_off_icon: Texture2D
 
+@export var undo_button: Button
+@export var redo_button: Button
+
 var is_playing = false
 
 var _project: Project
@@ -37,7 +40,12 @@ func attach_project(project: Project):
 
 	if _project:
 		_project.new_current_page.connect(_update_view)
+		_project.undo_redo.version_changed.connect(update_undo_redo_buttons)
 
+func update_undo_redo_buttons() -> void:
+	if _project:
+		undo_button.disabled = not _project.undo_redo.has_undo()
+		redo_button.disabled = not _project.undo_redo.has_redo()
 
 func _update_view(_page: Page) -> void:
 	framerate_slider.value = _project.framerate

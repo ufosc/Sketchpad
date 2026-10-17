@@ -20,9 +20,13 @@ signal frames_update
 
 @export var last_saved: String = "No Date"
 
+var undo_redo: UndoRedo = UndoRedo.new()
+
 var current_layer: int = 1
 var current_frame: int = 0
 
+func _init() -> void:
+	undo_redo.max_steps = 20
 
 ## Initializes a new project. [br]
 ## Used instead of [code]_init[/code] to avoid overwriting loaded data.
@@ -104,6 +108,17 @@ func get_thumbnail() -> Texture2D:
 ## Emit signal when page updates
 func _on_page_update() -> void:
 	frames_update.emit()
+
+
+## Edits the active layer with a new image.
+func edit_current_layer(idx: int, image: Image, old_image: Image = null) -> void:
+	var original = frames[current_frame].layers[idx].duplicate() if old_image == null else old_image
+	var new = image.duplicate()
+
+	undo_redo.create_action("Edit Layer")
+	undo_redo.add_do_method(frames[current_frame].set_layer.bind(idx, new))
+	undo_redo.add_undo_method(frames[current_frame].set_layer.bind(idx, original))
+	undo_redo.commit_action()
 
 
 ## Create a new blank page

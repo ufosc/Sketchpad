@@ -1,10 +1,10 @@
 class_name Canvas
 extends Node2D
 
-signal canvas_input(event: InputEventMouse)
+signal canvas_input(event: InputEvent)
 
 @export var camera_movable: bool = false
-@export var camera: Camera2D
+@export var camera: CanvasCamera
 
 var _project: Project
 
@@ -96,12 +96,13 @@ func bake_page() -> void:
 				c.b /= c.a
 			image_to_bake.set_pixel(x, y, c)
 
-	var layer_image = current_page.layers[current_layer]
+	var layer_image = current_page.layers[current_layer].duplicate()
 	layer_image.blend_rect(
 		image_to_bake, Rect2(Vector2.ZERO, image_to_bake.get_size()), Vector2.ZERO
 	)
 
-	current_page.set_layer(current_layer, layer_image)
+	#current_page.set_layer(current_layer, layer_image)
+	_project.edit_current_layer(current_layer, layer_image)
 
 	# Clearing dynamic and viewport now that it is baked.
 	for node in bake_node.get_children():

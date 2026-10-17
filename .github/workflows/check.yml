@@ -2,7 +2,7 @@ name: "Validate"
 on: [push, pull_request]
 
 env:
-  GODOT_VERSION: 4.6
+  GODOT_VERSION: 4.7.2
   EXPORT_NAME: sketchpad
   PROJECT_PATH: .
 
@@ -11,7 +11,7 @@ jobs:
     name: Verify and Test Code 
     runs-on: ubuntu-24.04
     container:
-      image: barichello/godot-ci:4.6
+      image: barichello/godot-ci:4.7.2
     steps:
       - name: Checkout
         uses: actions/checkout@v4

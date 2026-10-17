@@ -10,7 +10,7 @@ Modeled after old handheld animation tools, Sketchpad is meant to be fun and eas
 ## Features
 * Lo-fi animations with two resolution options.
 * Simple to use UI that gets out of your way.
-* Powered by Godot 4.6 for lightweight performance on any device.
+* Powered by Godot 4.7 for lightweight performance on any device.
 
 ## Installation
 The easiest way to try Sketchpad is through the [PWA](https://ufosc.github.io/Sketchpad/), as it is cross-platform and updates automatically.
@@ -21,11 +21,11 @@ Sketchpad is currently built for Windows and Linux.
 
 ## Development
 ### Building
-Make sure you have the standard edition of [Godot 4.6](https://godotengine.org/download/) installed.
+Make sure you have the standard edition of [Godot 4.7](https://godotengine.org/download/) installed.
 
 1. Clone the repository.
 2. Open Godot and load Sketchpad's `project.godot` file. 
-3. For instructions on how to export an executable, consult the [Godot documentation](https://docs.godotengine.org/en/4.6/tutorials/export/exporting_projects.html).
+3. For instructions on how to export an executable, consult the [Godot documentation](https://docs.godotengine.org/en/4.7/tutorials/export/exporting_projects.html).
 
 ### GDScript Toolkit
 Sketchpad also uses the GDScript Toolkit for linting and formatting. To install it, use the pip package manager:

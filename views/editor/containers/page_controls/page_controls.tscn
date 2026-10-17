@@ -18,7 +18,7 @@ font_color = Color(0, 0, 0, 1)
 [sub_resource type="LabelSettings" id="LabelSettings_juntj"]
 font_color = Color(0, 0, 0, 1)
 
-[node name="PageControls" type="Control" unique_id=352413597 node_paths=PackedStringArray("menu_button", "next_page_button", "page_count_label", "prev_page_button", "framerate_slider", "framerate_label", "play_button", "onion_skin_button")]
+[node name="PageControls" type="Control" unique_id=352413597 node_paths=PackedStringArray("menu_button", "next_page_button", "page_count_label", "prev_page_button", "framerate_slider", "framerate_label", "play_button", "onion_skin_button", "undo_button", "redo_button")]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -38,6 +38,8 @@ pause_icon = ExtResource("3_n0t25")
 onion_skin_button = NodePath("Panel/MarginContainer/ToolbarContents/ProjectControls/OnionSkinButton")
 onion_on_icon = ExtResource("5_cwjua")
 onion_off_icon = SubResource("CompressedTexture2D_n0t25")
+undo_button = NodePath("Panel/MarginContainer/ToolbarContents/ProjectControls/UndoButton")
+redo_button = NodePath("Panel/MarginContainer/ToolbarContents/ProjectControls/RedoButton")
 
 [node name="Panel" type="Panel" parent="." unique_id=1178714550]
 layout_mode = 1
@@ -106,6 +108,24 @@ horizontal_alignment = 1
 
 [node name="ProjectControls" type="HBoxContainer" parent="Panel/MarginContainer/ToolbarContents" unique_id=1451091142]
 layout_mode = 2
+
+[node name="UndoButton" type="Button" parent="Panel/MarginContainer/ToolbarContents/ProjectControls" unique_id=1123567891]
+custom_minimum_size = Vector2(48, 0)
+layout_mode = 2
+tooltip_text = "Undo the Previous Action"
+disabled = true
+icon = ExtResource("5_ndc2b")
+icon_alignment = 1
+expand_icon = true
+
+[node name="RedoButton" type="Button" parent="Panel/MarginContainer/ToolbarContents/ProjectControls" unique_id=1401778032]
+custom_minimum_size = Vector2(48, 0)
+layout_mode = 2
+tooltip_text = "Redo the Previous Action"
+disabled = true
+icon = ExtResource("6_sacgt")
+icon_alignment = 1
+expand_icon = true
 
 [node name="FRContainer" type="HBoxContainer" parent="Panel/MarginContainer/ToolbarContents/ProjectControls" unique_id=645195669]
 layout_mode = 2

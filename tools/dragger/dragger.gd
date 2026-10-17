@@ -24,7 +24,7 @@ func on_pointer_down(_position: Vector2, _canvas: Canvas) -> void:
 	_layer_image = layer.duplicate()
 
 	# Remove the original so the dragged copy is not duplicated.
-	layer.fill(Color(0, 0, 0, 0))
+	layer.fill(Color.TRANSPARENT)
 	page.set_layer(project.current_layer, layer)
 
 	if _drag_sprite:
@@ -56,9 +56,9 @@ func on_pointer_up(position: Vector2, canvas: Canvas) -> void:
 	if _layer_image and canvas and canvas._project:
 		var project: Project = canvas._project
 		var page: Page = project.frames[project.current_frame]
-		var layer = page.layers[project.current_layer]
+		var layer = page.layers[project.current_layer].duplicate()
 		var offset = position - _start_mouse
 		var moved = Image.create_empty(layer.get_width(), layer.get_height(), false, Image.FORMAT_RGBA8)
 		moved.blend_rect(_layer_image, Rect2(Vector2.ZERO, _layer_image.get_size()), offset)
-		page.set_layer(project.current_layer, moved)
+		project.edit_current_layer(project.current_layer, moved, _layer_image)
 		_layer_image = null

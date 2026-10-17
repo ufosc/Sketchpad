@@ -8,7 +8,7 @@ extends PanelContainer
 @export var brush_list: ItemList
 @export var button_group: ButtonGroup
 @export var tool: Brush
-@export var default_brush_width = 2.5
+@export var default_brush_width: int = 3
 @export var default_brush_hardness = 1.0
 
 var tool_manager: ToolManager
@@ -58,8 +58,9 @@ func assign_tool(new_tool: Tool) -> void:
 
 
 func _on_thickness_changed(value: float) -> void:
-	thick_label.text = "%dpx" % value
-	tool.width = value
+	var size := int(round(value))
+	thick_label.text = "%dpx" % size
+	tool.width = size
 	tool.emit_signal("settings_changed")
 
 

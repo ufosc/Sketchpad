@@ -25,6 +25,7 @@ offset_right = 20.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_default_cursor_shape = 3
 
 [node name="Layers" type="Node2D" parent="Control" unique_id=760557918]
 

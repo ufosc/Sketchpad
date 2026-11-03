@@ -5,6 +5,8 @@ on:
     branches:
       - main
 
+if: github.repository == 'ufosc/Sketchpad'
+
 env:
   GODOT_VERSION: 4.7.2
   EXPORT_NAME: sketchpad

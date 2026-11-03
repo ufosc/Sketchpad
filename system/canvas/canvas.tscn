@@ -32,6 +32,7 @@ grow_vertical = 2
 script = ExtResource("3_onion")
 
 [node name="Dynamic" type="Node2D" parent="Control" unique_id=356778995]
+z_index = 2
 
 [node name="BakeViewport" type="SubViewport" parent="." unique_id=1325751403]
 transparent_bg = true

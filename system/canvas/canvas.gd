@@ -22,13 +22,17 @@ func _ready() -> void:
 
 
 func attach_project(project: Project) -> void:
-	if _project and _project.new_current_page.is_connected(render_page):
-		_project.new_current_page.disconnect(render_page)
+	if _project:
+		if _project.new_current_page.is_connected(render_page):
+			_project.new_current_page.disconnect(render_page)
+		if _project.new_current_layer.is_connected(_update_dynamic):
+			_project.new_current_layer.disconnect(_update_dynamic)
 
 	_project = project
 
 	if _project:
 		_project.new_current_page.connect(render_page)
+		_project.new_current_layer.connect(_update_dynamic)
 		onion_skin_renderer.attach_project(project)
 
 
@@ -52,7 +56,7 @@ func render_page(page: Page) -> void:
 		if sprite is Sprite2D:
 			sprite.texture = texture
 			sprite.z_index = i
-		i += 2
+		i += 3
 
 	onion_skin_renderer.render()
 
@@ -121,3 +125,7 @@ func bake_page() -> void:
 
 func _on_gui_input(event: InputEvent) -> void:
 	canvas_input.emit(event)
+
+
+func _update_dynamic(idx: int) -> void:
+	dynamic_node.z_index = idx + 2

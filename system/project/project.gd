@@ -2,6 +2,7 @@ class_name Project
 extends Resource
 
 signal new_current_page(page: Page)
+signal new_current_layer(idx: int)
 signal frames_update
 
 @export var title: String = "New Animation"
@@ -76,6 +77,7 @@ func next_page(is_loop: bool) -> Page:
 		else:
 			new_page()
 	new_current_page.emit(frames[current_frame])
+	_bound_layer()
 	return frames[current_frame]
 
 
@@ -84,6 +86,7 @@ func prev_page() -> Page:
 	if current_frame > 0:
 		current_frame -= 1
 	new_current_page.emit(frames[current_frame])
+	_bound_layer()
 	return frames[current_frame]
 
 
@@ -133,12 +136,16 @@ func new_page() -> void:
 func set_frame(idx: int) -> void:
 	current_frame = idx
 	new_current_page.emit(frames[current_frame])
+	_bound_layer()
 
 
+## Switch to new layer
 func set_layer(idx: int) -> void:
 	current_layer = idx
+	new_current_layer.emit(idx)
 
 
+## Deletes the frame at specified index
 func delete_frame(idx: int) -> void:
 	frames.remove_at(idx)
 	if current_frame >= frames.size():
@@ -148,3 +155,9 @@ func delete_frame(idx: int) -> void:
 
 func _on_frame_update() -> void:
 	new_current_page.emit(frames[current_frame])
+	_bound_layer()
+
+
+func _bound_layer() -> void:
+	if(len(frames[current_frame].layers) < current_layer):
+		current_layer = len(frames[current_frame].layers) - 1

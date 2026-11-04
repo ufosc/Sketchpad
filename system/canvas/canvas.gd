@@ -26,6 +26,7 @@ func set_tool_cursor(tool: Tool) -> void:
 		Input.set_custom_mouse_cursor(tool.cursor, Input.CURSOR_CROSS, tool.cursor_hotspot)
 		control_node.mouse_default_cursor_shape = Control.CURSOR_CROSS
 	else:
+		Input.set_custom_mouse_cursor(null, Input.CURSOR_CROSS)
 		control_node.mouse_default_cursor_shape = Control.CURSOR_ARROW
 
 

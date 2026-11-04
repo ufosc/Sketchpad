@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cwi0viffjfucu"]
+
+[ext_resource type="Script" uid="uid://dptubfrr1xpq2" path="res://tools/line/line_handler.gd" id="1_361f4"]
+
+[node name="Line" type="PanelContainer" unique_id=1724553266]
+script = ExtResource("1_361f4")

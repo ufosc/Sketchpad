@@ -1,0 +1,38 @@
+name: Nightly Web Build
+
+on:
+  workflow_call:
+
+env:
+  GODOT_VERSION: 4.7.2
+  EXPORT_NAME: sketchpad
+  PROJECT_PATH: .
+
+jobs:
+  export-web:
+    name: Nightly Web Export
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+    container:
+      image: barichello/godot-ci:4.7.2
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          lfs: true
+      - name: Setup
+        run: |
+          mkdir -v -p ~/.local/share/godot/export_templates/
+          mv /root/.local/share/godot/export_templates/${GODOT_VERSION}.stable ~/.local/share/godot/export_templates/${GODOT_VERSION}.stable
+      - name: Nightly Web Build
+        run: |
+          mkdir -v -p build/nightly
+          EXPORT_DIR="$(readlink -f build)"
+          cd $PROJECT_PATH
+          godot --headless --verbose --export-release "Web" "$EXPORT_DIR/nightly/index.html"
+      - name: Upload Nightly Build
+        uses: actions/upload-artifact@v4
+        with:
+          name: nightly-web
+          path: build/nightly

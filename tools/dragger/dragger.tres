@@ -1,6 +1,7 @@
 [gd_resource type="Resource" script_class="Dragger" format=3 uid="uid://bd0lp47175we2"]
 
 [ext_resource type="PackedScene" uid="uid://cqm4tsb4pn43x" path="res://tools/dragger/dragger_menu.tscn" id="1_8fdjc"]
+[ext_resource type="Texture2D" uid="uid://dd7c7kpav52du" path="res://tools/dragger/cursor.png" id="1_jf3il"]
 [ext_resource type="Script" uid="uid://cmoaigxlt61kr" path="res://tools/dragger/dragger.gd" id="1_w0x6r"]
 [ext_resource type="PackedScene" uid="uid://6m2tyutsyre1" path="res://tools/dragger/dragger_bar.tscn" id="2_tp2mx"]
 [ext_resource type="Texture2D" uid="uid://bobmkmco0tv2m" path="res://assets/icons/dragger.png" id="2_y2hwo"]
@@ -9,6 +10,8 @@
 script = ExtResource("1_w0x6r")
 name = "Dragger"
 icon = ExtResource("2_y2hwo")
+cursor = ExtResource("1_jf3il")
+cursor_hotspot = Vector2(16, 16)
 handler = ExtResource("1_8fdjc")
 handler_bar = ExtResource("2_tp2mx")
 metadata/_custom_type_script = "uid://cmoaigxlt61kr"

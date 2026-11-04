@@ -92,24 +92,44 @@ jobs:
           EXPORT_DIR="$(readlink -f build)"
           cd $PROJECT_PATH
           godot --headless --verbose --export-release "Web" "$EXPORT_DIR/web/index.html"
+      - name: Upload Stable Web Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: stable-web
+          path: build/web
+
+  export-nightly-web:
+    if: github.repository == 'ufosc/Sketchpad'
+    uses: ./.github/workflows/nightly.yml
+
+  deploy:
+    if: github.repository == 'ufosc/Sketchpad'
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs:
+      - export-web
+      - export-nightly-web
+    steps:
+      - name: Download Stable Web Build
+        uses: actions/download-artifact@v4
+        with:
+          name: stable-web
+          path: build/site
+      - name: Download Nightly Web Build
+        uses: actions/download-artifact@v4
+        with:
+          name: nightly-web
+          path: build/site/nightly
       - name: Upload Pages Artifact
-        id: deployment
         uses: actions/upload-pages-artifact@v4
         with:
           name: github-pages
-          path: build/web
-
-  deploy:
-      if: github.repository == 'ufosc/Sketchpad'
-      permissions:
-        pages: write
-        id-token: write
-      environment:
-        name: github-pages
-        url: ${{ steps.deployment.outputs.page_url }}
-      runs-on: ubuntu-latest
-      needs: export-web
-      steps:
-        - name: Deploy to GitHub Pages
-          id: deployment
-          uses: actions/deploy-pages@v4
+          path: build/site
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

@@ -21,6 +21,14 @@ func _ready() -> void:
 	camera.movable = camera_movable
 
 
+func set_tool_cursor(tool: Tool) -> void:
+	if tool and tool.cursor:
+		Input.set_custom_mouse_cursor(tool.cursor, Input.CURSOR_CROSS, tool.cursor_hotspot)
+		control_node.mouse_default_cursor_shape = Control.CURSOR_CROSS
+	else:
+		control_node.mouse_default_cursor_shape = Control.CURSOR_ARROW
+
+
 func attach_project(project: Project) -> void:
 	if _project:
 		if _project.new_current_page.is_connected(render_page):

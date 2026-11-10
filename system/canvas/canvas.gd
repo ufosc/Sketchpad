@@ -34,6 +34,12 @@ func attach_project(project: Project) -> void:
 		_project.new_current_page.connect(render_page)
 		_project.new_current_layer.connect(_update_dynamic)
 		onion_skin_renderer.attach_project(project)
+	else:
+		_clear_rendered_layers()
+		for node in dynamic_node.get_children():
+			dynamic_node.remove_child(node)
+			node.queue_free()
+		onion_skin_renderer.attach_project(null)
 
 
 ## Refreshes canvas sprites to current page. [br]
@@ -59,6 +65,12 @@ func render_page(page: Page) -> void:
 		i += 3
 
 	onion_skin_renderer.render()
+
+
+func _clear_rendered_layers() -> void:
+	for node in layers_node.get_children():
+		layers_node.remove_child(node)
+		node.queue_free()
 
 
 func toggle_onion_skin() -> void:

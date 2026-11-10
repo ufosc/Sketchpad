@@ -5,7 +5,7 @@ signal page_update
 
 @export var layers: Array[Image] = []
 var textures: Array[ImageTexture] = []
-var names: Array[String] = []
+@export var names: Array[String] = []
 
 
 func _init(w: int = 0, h: int = 0) -> void:

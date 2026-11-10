@@ -56,6 +56,10 @@ func load_project(p: Project) -> void:
 ## Loads in a blank project
 func unload_project() -> void:
 	playback_manager.pause()
+	current_page = null
+	touch_gesture_active = false
+	emulated_touch_pending = false
+	emulated_touch_stroke_active = false
 	load_project(null)
 
 ## Calls UndoRedo's Undo function.

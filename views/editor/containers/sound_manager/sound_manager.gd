@@ -15,11 +15,12 @@ func _ready() -> void:
 
 func attach_project(project: Project) -> void:
 	_project = project
-	if _project.audio:
+	if _project and _project.audio:
 		sound_label.text = "Audio: %ds" % _project.audio.get_length()
 		remove_sound_button.disabled = false
 	else:
 		sound_label.text = "No audio assigned."
+		remove_sound_button.disabled = true
 
 
 ## Attaches audio to the project.

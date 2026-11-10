@@ -11,6 +11,7 @@ var _project: Project
 
 func attach_project(project: Project) -> void:
 	_project = project
+	render()
 
 
 func toggle() -> void:

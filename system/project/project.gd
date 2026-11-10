@@ -21,13 +21,19 @@ signal frames_update
 
 @export var last_saved: String = "No Date"
 
-var undo_redo: UndoRedo = UndoRedo.new()
+var undo_redo: UndoRedo
 
 var current_layer: int = 1
 var current_frame: int = 0
 
 func _init() -> void:
+	undo_redo = UndoRedo.new()
 	undo_redo.max_steps = 20
+
+func _notification(what: int) -> void:
+	if what == NOTIFICATION_PREDELETE:
+		if is_instance_valid(undo_redo):
+			undo_redo.free()
 
 ## Initializes a new project. [br]
 ## Used instead of [code]_init[/code] to avoid overwriting loaded data.
@@ -185,6 +191,9 @@ func delete_frame(idx: int) -> void:
 	_bound_selection()
 	new_current_page.emit(frames[current_frame])
 
+
+func _on_new_current_page(page: Page) -> void:
+	undo_redo.clear_history()
 
 func _on_frame_update() -> void:
 	if frames.is_empty():

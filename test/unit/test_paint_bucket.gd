@@ -23,7 +23,7 @@ func before_each():
 
 func after_each():
 	EditorState.color = original_editor_color
-	canvas.queue_free()
+	canvas.free()
 
 func test_fills_uniform_layer():
 	var page = project.get_current_page()

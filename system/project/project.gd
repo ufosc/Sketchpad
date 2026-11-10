@@ -34,16 +34,25 @@ func _init() -> void:
 func new_project(w: int, h: int) -> void:
 	width = w
 	height = h
+	frames.clear()
+	current_frame = 0
+	current_layer = 1
 
+	var was_frame_update_connected := frames_update.is_connected(_on_frame_update)
+	if was_frame_update_connected:
+		frames_update.disconnect(_on_frame_update)
 	new_page()
+	if not frames_update.is_connected(_on_frame_update):
+		frames_update.connect(_on_frame_update)
 	new_current_page.emit(frames[0])
-
-	frames_update.connect(_on_frame_update)
 	print("[Project] New project created")
 
 
 ## Returns the current focused page in the project.
 func get_current_page() -> Page:
+	if frames.is_empty():
+		return null
+	_bound_selection()
 	return frames[current_frame]
 
 
@@ -53,6 +62,7 @@ func get_current_page() -> Page:
 func get_page_by_index(index: int = 0) -> Page:
 	if index >= 0 and index < len(frames):
 		current_frame = index
+		_bound_selection()
 		new_current_page.emit(frames[current_frame])
 		return frames[current_frame]
 	return null
@@ -62,7 +72,7 @@ func get_page_by_index(index: int = 0) -> Page:
 ## Returns [code]null[/code] if the page does not exist. [br]
 ## [param distance]: Determines how far to grab the page.
 func get_distant_page(distance: int = 1) -> Page:
-	if current_frame + distance >= 0 and current_frame + distance < len(frames):
+	if _is_valid_frame(current_frame + distance):
 		return frames[current_frame + distance]
 	return null
 
@@ -70,23 +80,31 @@ func get_distant_page(distance: int = 1) -> Page:
 ## Changes the current project page to the next page. [br]
 ## [param is_loop]: Goes back to page 0 if at the end. Adds a new page otherwise.
 func next_page(is_loop: bool) -> Page:
+	if frames.is_empty():
+		new_page()
+		current_frame = 0
+		new_current_page.emit(frames[current_frame])
+		return frames[current_frame]
+
 	current_frame += 1
 	if len(frames) < (current_frame + 1):
 		if is_loop:
 			current_frame = 0
 		else:
 			new_page()
+	_bound_selection()
 	new_current_page.emit(frames[current_frame])
-	_bound_layer()
 	return frames[current_frame]
 
 
 ## Changes the current project page to the previous page. Stops at frame 0.
 func prev_page() -> Page:
+	if frames.is_empty():
+		return null
 	if current_frame > 0:
 		current_frame -= 1
+	_bound_selection()
 	new_current_page.emit(frames[current_frame])
-	_bound_layer()
 	return frames[current_frame]
 
 
@@ -94,7 +112,11 @@ func prev_page() -> Page:
 func on_project_save() -> void:
 	last_saved = Time.get_datetime_string_from_system(false, true)
 
-	var tn = frames[current_frame].flatten()
+	var current_page := get_current_page()
+	if current_page == null:
+		return
+
+	var tn = current_page.flatten()
 	if tn:
 		tn.resize(128, 96, Image.INTERPOLATE_NEAREST)
 		thumbnail = tn
@@ -115,12 +137,16 @@ func _on_page_update() -> void:
 
 ## Edits the active layer with a new image.
 func edit_current_layer(idx: int, image: Image, old_image: Image = null) -> void:
-	var original = frames[current_frame].layers[idx].duplicate() if old_image == null else old_image
+	var current_page := get_current_page()
+	if current_page == null or not _is_valid_layer(idx) or image == null:
+		return
+
+	var original = current_page.layers[idx].duplicate() if old_image == null else old_image
 	var new = image.duplicate()
 
 	undo_redo.create_action("Edit Layer")
-	undo_redo.add_do_method(frames[current_frame].set_layer.bind(idx, new))
-	undo_redo.add_undo_method(frames[current_frame].set_layer.bind(idx, original))
+	undo_redo.add_do_method(current_page.set_layer.bind(idx, new))
+	undo_redo.add_undo_method(current_page.set_layer.bind(idx, original))
 	undo_redo.commit_action()
 
 
@@ -134,30 +160,52 @@ func new_page() -> void:
 
 ## Switch to new frame
 func set_frame(idx: int) -> void:
+	if not _is_valid_frame(idx):
+		return
 	current_frame = idx
+	_bound_selection()
 	new_current_page.emit(frames[current_frame])
-	_bound_layer()
 
 
 ## Switch to new layer
 func set_layer(idx: int) -> void:
+	if not _is_valid_layer(idx):
+		return
 	current_layer = idx
 	new_current_layer.emit(idx)
 
 
 ## Deletes the frame at specified index
 func delete_frame(idx: int) -> void:
+	if not _is_valid_frame(idx) or frames.size() <= 1:
+		return
 	frames.remove_at(idx)
 	if current_frame >= frames.size():
 		current_frame = frames.size() - 1
+	_bound_selection()
 	new_current_page.emit(frames[current_frame])
 
 
 func _on_frame_update() -> void:
+	if frames.is_empty():
+		return
+	_bound_selection()
 	new_current_page.emit(frames[current_frame])
-	_bound_layer()
 
+func _is_valid_frame(idx: int) -> bool:
+	return idx >= 0 and idx < frames.size()
 
-func _bound_layer() -> void:
-	if(len(frames[current_frame].layers) < current_layer):
-		current_layer = len(frames[current_frame].layers) - 1
+func _is_valid_layer(idx: int) -> bool:
+	if not _is_valid_frame(current_frame):
+		return false
+	return idx >= 0 and idx < frames[current_frame].layers.size()
+
+func _bound_selection() -> void:
+	if frames.is_empty():
+		current_frame = 0
+		current_layer = 0
+		return
+
+	current_frame = clampi(current_frame, 0, frames.size() - 1)
+	var layer_count := frames[current_frame].layers.size()
+	current_layer = clampi(current_layer, 0, maxi(layer_count - 1, 0))

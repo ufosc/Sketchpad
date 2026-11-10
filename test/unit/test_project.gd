@@ -14,6 +14,65 @@ func test_project_creation():
 	assert_not_null(project, "Project existence")
 
 
+func test_new_project_resets_existing_frames():
+	project.new_page()
+	project.new_project(100, 150)
+
+	assert_eq(project.frames.size(), 1, "Reinitializing removes old frames")
+	assert_eq(project.current_frame, 0, "Reinitializing selects the first frame")
+	assert_eq(project.frames[0].layers[0].get_width(), 100, "New width is applied")
+	assert_eq(project.frames[0].layers[0].get_height(), 150, "New height is applied")
+
+
+func test_invalid_frame_selection_is_ignored():
+	watch_signals(project)
+	project.set_frame(-1)
+	project.set_frame(project.frames.size())
+
+	assert_eq(project.current_frame, 0, "Invalid frame selection leaves the frame unchanged")
+	assert_signal_not_emitted(project, "new_current_page", "Invalid frame selection emits no signal")
+
+
+func test_invalid_layer_selection_is_ignored():
+	watch_signals(project)
+	project.set_layer(-1)
+	project.set_layer(project.get_current_page().layers.size())
+
+	assert_eq(project.current_layer, 1, "Invalid layer selection leaves the layer unchanged")
+	assert_signal_not_emitted(project, "new_current_layer", "Invalid layer selection emits no signal")
+
+
+func test_delete_last_frame_is_ignored():
+	watch_signals(project)
+	project.delete_frame(0)
+
+	assert_eq(project.frames.size(), 1, "A project keeps one frame")
+	assert_not_null(project.get_current_page(), "A current page remains available")
+	assert_signal_not_emitted(project, "new_current_page", "Deleting the last frame emits no signal")
+
+
+func test_current_layer_is_bounded_after_frame_change():
+	project.set_layer(1)
+	project.new_page()
+	project.frames[1].delete_layer(1)
+	project.set_frame(1)
+
+	assert_eq(project.current_layer, 0, "Current layer is bounded to the new page")
+
+
+func test_invalid_layer_edit_is_ignored():
+	var original := project.get_current_page().layers[0].duplicate()
+	project.edit_current_layer(-1, original)
+	project.edit_current_layer(project.get_current_page().layers.size(), original)
+	project.edit_current_layer(0, null)
+
+	assert_eq(
+		project.get_current_page().layers[0].get_data(),
+		original.get_data(),
+		"Invalid edits do not change the layer"
+	)
+
+
 func test_current_page():
 	var page = project.get_current_page()
 	assert_not_null(page, "Page existence")

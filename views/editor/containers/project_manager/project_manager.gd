@@ -35,6 +35,6 @@ func _on_text_changed(new_text: String) -> void:
 
 
 func _on_menu_button_pressed() -> void:
+	await menu.open()
 	edit_extras.close()
 	editor.unload_project()
-	menu.open()

@@ -4,8 +4,9 @@ extends Resource
 signal page_update
 
 @export var layers: Array[Image] = []
-var textures: Array[ImageTexture] = []
 @export var names: Array[String] = []
+
+var textures: Array[ImageTexture] = []
 
 
 func _init(w: int = 0, h: int = 0) -> void:

@@ -25,13 +25,16 @@ func attach_project(project: Project) -> void:
 
 ## Attaches audio to the project.
 func _set_audio() -> void:
+	if not _project:
+		return
 	if OS.has_feature("web"):
 		_ensure_file_access_web()
 		file_access_web.open(".mp3")
 		return
+	var current_project = _project
 	sound_file_dialog.show()
 	var path = await sound_file_dialog.file_selected
-	if path:
+	if path and _project and current_project == _project:
 		var stream = AudioStreamMP3.load_from_file(path)
 		if stream:
 			_project.audio = stream
@@ -48,6 +51,8 @@ func _set_audio() -> void:
 
 ## Removes audio from the project.
 func _remove_audio() -> void:
+	if not _project:
+		return
 	_project.audio = null
 	_project.audio_origin_framerate = 1.0
 	Toast.show_message("Removed audio from project.")
@@ -57,6 +62,8 @@ func _remove_audio() -> void:
 
 # Web File Access Handlers
 func _on_file_loaded(_file_name: String, _file_type: String, base64_data: String) -> void:
+	if not _project:
+		return
 	var bytes = Marshalls.base64_to_raw(base64_data)
 
 	var file = FileAccess.open("user://temp.mp3", FileAccess.WRITE)

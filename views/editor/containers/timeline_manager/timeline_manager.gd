@@ -73,6 +73,8 @@ func setup_image_timeline() -> void:
 
 
 func _on_layers_list_selection_changed(source: LayersList) -> void:
+	if not _project:
+		return
 	for child in image_timeline.get_children():
 		var layers_list := child as LayersList
 
@@ -92,6 +94,8 @@ func _on_layers_list_selection_changed(source: LayersList) -> void:
 
 
 func _creating_new_layer() -> void:
+	if not _project:
+		return
 	var frame_idx := _project.current_frame
 	var layer_idx := _project.current_layer + 1
 	var w := _project.width
@@ -100,7 +104,7 @@ func _creating_new_layer() -> void:
 
 
 func _deleting_layers() -> void:
-	if not current_list:
+	if not current_list or not _project:
 		return
 
 	var deleting_idx := current_list.selected_indices

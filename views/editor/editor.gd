@@ -27,9 +27,7 @@ func _ready() -> void:
 	canvas.camera.touch_gesture_ended.connect(_on_touch_gesture_ended)
 
 	page_controls.menu_toggle.connect(edit_extras.open)
-	page_controls.play_toggle.connect(
-		func(): playback_manager.is_playing = !playback_manager.is_playing
-	)
+	page_controls.play_toggle.connect(playback_manager.toggle_playback_state)
 	page_controls.onion_skin_toggle.connect(canvas.toggle_onion_skin)
 	page_controls.undo_button.pressed.connect(undo)
 	page_controls.redo_button.pressed.connect(redo)

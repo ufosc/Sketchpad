@@ -110,7 +110,6 @@ menu = NodePath("../Menu")
 editor = NodePath("../..")
 
 [connection signal="tool_changed" from="." to="ToolSettingsBar" method="_on_editor_tool_changed"]
-[connection signal="play_toggle" from="PageControls" to="PlaybackManager" method="toggle_playback_state"]
 
 [editable path="EditExtras"]
 [editable path="Gallery"]

@@ -79,8 +79,9 @@ func _on_play_pressed() -> void:
 
 
 func _on_slider_value_changed(value: float) -> void:
-	framerate_label.text = str(int(value))
-	_project.framerate = value
+	if _project:
+		framerate_label.text = str(int(value))
+		_project.framerate = value
 
 
 func _on_menu_button_pressed() -> void:

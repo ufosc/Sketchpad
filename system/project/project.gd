@@ -192,7 +192,7 @@ func delete_frame(idx: int) -> void:
 	new_current_page.emit(frames[current_frame])
 
 
-func _on_new_current_page(page: Page) -> void:
+func _on_new_current_page(_page: Page) -> void:
 	undo_redo.clear_history()
 
 func _on_frame_update() -> void:

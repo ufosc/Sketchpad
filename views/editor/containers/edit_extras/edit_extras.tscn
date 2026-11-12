@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://egoa0insqasw" path="res://views/editor/containers/sound_manager/sound_manager.tscn" id="4_5xylh"]
 [ext_resource type="Texture2D" uid="uid://uju4rpqy761u" path="res://assets/icons/gallery.png" id="4_062x0"]
 [ext_resource type="Texture2D" uid="uid://ivfccuqs2wbt" path="res://assets/icons/sound.png" id="5_r7vif"]
+[ext_resource type="PackedScene" uid="uid://bmk7iadgvuk0l" path="res://shortcuts.tscn" id="10_2tc28"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0ld5u"]
 bg_color = Color(1, 1, 1, 1)
@@ -68,6 +69,11 @@ metadata/_tab_index = 2
 visible = false
 layout_mode = 2
 metadata/_tab_index = 3
+
+[node name="Shortcuts" parent="Panel/VBoxContainer/TabContainer" unique_id=1959400162 instance=ExtResource("10_2tc28")]
+visible = false
+layout_mode = 2
+metadata/_tab_index = 4
 
 [node name="CloseButton" type="Button" parent="Panel/VBoxContainer" unique_id=970103182]
 layout_mode = 2

@@ -1,6 +1,7 @@
 [gd_resource type="Resource" script_class="PaintBucket" format=3 uid="uid://b5s1gl2gxjcfm"]
 
 [ext_resource type="PackedScene" uid="uid://dpxmvb2d305l5" path="res://tools/paint_bucket/paint_bucket_menu.tscn" id="1_4fikb"]
+[ext_resource type="Texture2D" uid="uid://2228wlxt7kfi" path="res://tools/paint_bucket/cursor.png" id="1_lpaak"]
 [ext_resource type="Script" uid="uid://bkfy5dxh8w0kk" path="res://tools/paint_bucket/paint_bucket.gd" id="1_swbpr"]
 [ext_resource type="Texture2D" uid="uid://c02ml124hodgj" path="res://assets/icons/paint_bucket.png" id="2_362ot"]
 [ext_resource type="PackedScene" uid="uid://ii77ofn0qrer" path="res://tools/paint_bucket/paint_bucket_bar.tscn" id="2_ajtq2"]
@@ -10,6 +11,8 @@ script = ExtResource("1_swbpr")
 tolerance = 0.1
 name = "Paint Bucket"
 icon = ExtResource("2_362ot")
+cursor = ExtResource("1_lpaak")
+cursor_hotspot = Vector2(16, 16)
 handler = ExtResource("1_4fikb")
 handler_bar = ExtResource("2_ajtq2")
 metadata/_custom_type_script = "uid://bkfy5dxh8w0kk"

@@ -33,6 +33,8 @@ func _ready() -> void:
 	page_controls.onion_skin_toggle.connect(canvas.toggle_onion_skin)
 	page_controls.undo_button.pressed.connect(undo)
 	page_controls.redo_button.pressed.connect(redo)
+	tool_changed.connect(canvas.set_tool_cursor)
+	canvas.set_tool_cursor(current_tool)
 
 
 ## Creates a blank project and loads into the editor.

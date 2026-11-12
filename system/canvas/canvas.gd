@@ -20,6 +20,15 @@ var _project: Project
 func _ready() -> void:
 	camera.movable = camera_movable
 
+## Shows [param tool] cursor while the mouse is over the drawing area
+func set_tool_cursor(tool: Tool) -> void:
+	if tool and tool.cursor:
+		Input.set_custom_mouse_cursor(tool.cursor, Input.CURSOR_CROSS, tool.cursor_hotspot)
+		control_node.mouse_default_cursor_shape = Control.CURSOR_CROSS
+	else:
+		Input.set_custom_mouse_cursor(null, Input.CURSOR_CROSS)
+		control_node.mouse_default_cursor_shape = Control.CURSOR_ARROW
+
 
 func attach_project(project: Project) -> void:
 	if _project:

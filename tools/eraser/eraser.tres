@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://cpnarfu6qxy4c" path="res://tools/eraser/eraser.gd" id="1_7t4d2"]
 [ext_resource type="PackedScene" uid="uid://d0v3i8vgql1sj" path="res://tools/eraser/eraser_menu.tscn" id="1_8hcur"]
+[ext_resource type="Texture2D" uid="uid://bsc13whb44iuo" path="res://tools/eraser/cursor.png" id="1_nr3ku"]
 [ext_resource type="Texture2D" uid="uid://5abv7wuu1o5p" path="res://assets/icons/eraser.png" id="2_334jt"]
 [ext_resource type="PackedScene" uid="uid://dl4jwk7m45ccf" path="res://tools/eraser/eraser_bar.tscn" id="2_kvqie"]
 [ext_resource type="Texture2D" uid="uid://cfk507ghqjsck" path="res://assets/brush_templates/big_circle.png" id="3_334jt"]
@@ -11,6 +12,8 @@ script = ExtResource("1_7t4d2")
 original_stamp = ExtResource("3_334jt")
 name = "Eraser"
 icon = ExtResource("2_334jt")
+cursor = ExtResource("1_nr3ku")
+cursor_hotspot = Vector2(16, 16)
 handler = ExtResource("1_8hcur")
 handler_bar = ExtResource("2_kvqie")
 metadata/_custom_type_script = "uid://cpnarfu6qxy4c"

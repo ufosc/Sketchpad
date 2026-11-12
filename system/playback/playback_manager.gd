@@ -21,6 +21,9 @@ func attach_project(project: Project) -> void:
 
 ## Plays the assigned project from the current frame.
 func play() -> void:
+	if not _project:
+		is_playing = false
+		return
 	_update_audio()
 	if audio_stream_player.stream:
 		audio_stream_player.play(_get_current_second())
@@ -28,6 +31,9 @@ func play() -> void:
 
 ## Pauses the assigned project.
 func pause() -> void:
+	if not _project:
+		is_playing = false
+		return
 	if audio_stream_player.stream:
 		audio_stream_player.stop()
 	is_playing = false
@@ -40,6 +46,8 @@ func toggle_playback_state(new_play_state: bool) -> void:
 		pause()
 
 func _process(delta: float) -> void:
+	if not _project or not is_playing:
+		return
 	if is_playing:
 		var frame_time = _get_frame_time()
 		_timer += delta

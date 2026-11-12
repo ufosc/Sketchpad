@@ -20,8 +20,8 @@ func before_each():
 func after_each():
 	for child in onion_skin.get_children():
 		onion_skin.remove_child(child)
-		child.queue_free()
-	onion_skin.queue_free()
+		child.free()
+	onion_skin.free()
 
 
 # -- Onion Skin Tests --

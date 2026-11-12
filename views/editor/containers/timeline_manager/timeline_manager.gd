@@ -14,21 +14,36 @@ var pasteboard_images: Array[Image]
 var pasteboard_names: Array[String]
 
 var _project: Project
+var _buttons_connected: bool = false
 
 
 func attach_project(proj: Project) -> void:
-	_project = proj
-	_project.frames_update.connect(_on_frames_update)
-	new_layer_button.pressed.connect(_creating_new_layer)
-	copy_layer_button.pressed.connect(_on_click_copy)
-	cut_layer_button.pressed.connect(_on_click_cut)
-	paste_layer_button.pressed.connect(_on_click_paste)
-	delete_layer_button.pressed.connect(_deleting_layers)
+	if _project and _project.frames_update.is_connected(_on_frames_update):
+		_project.frames_update.disconnect(_on_frames_update)
 
+	_project = proj
+
+	if not _buttons_connected:
+		new_layer_button.pressed.connect(_creating_new_layer)
+		copy_layer_button.pressed.connect(_on_click_copy)
+		cut_layer_button.pressed.connect(_on_click_cut)
+		paste_layer_button.pressed.connect(_on_click_paste)
+		delete_layer_button.pressed.connect(_deleting_layers)
+		_buttons_connected = true
+
+	if not _project:
+		for child in image_timeline.get_children():
+			child.queue_free()
+		return
+
+	_project.frames_update.connect(_on_frames_update)
 	setup_image_timeline()
 
 
 func setup_image_timeline() -> void:
+	if not _project:
+		return
+
 	for child in image_timeline.get_children():
 		if child is Control:
 			child.release_focus()
@@ -58,6 +73,8 @@ func setup_image_timeline() -> void:
 
 
 func _on_layers_list_selection_changed(source: LayersList) -> void:
+	if not _project:
+		return
 	for child in image_timeline.get_children():
 		var layers_list := child as LayersList
 
@@ -77,6 +94,8 @@ func _on_layers_list_selection_changed(source: LayersList) -> void:
 
 
 func _creating_new_layer() -> void:
+	if not _project:
+		return
 	var frame_idx := _project.current_frame
 	var layer_idx := _project.current_layer + 1
 	var w := _project.width
@@ -85,7 +104,7 @@ func _creating_new_layer() -> void:
 
 
 func _deleting_layers() -> void:
-	if not current_list:
+	if not current_list or not _project:
 		return
 
 	var deleting_idx := current_list.selected_indices
@@ -141,7 +160,7 @@ func _on_click_paste() -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
-	if event is InputEventKey and event.pressed and not event.echo:
+	if event is InputEventKey and event.pressed and not event.echo and _project:
 		var command_or_ctrl_pressed = event.ctrl_pressed or event.meta_pressed
 
 		if not command_or_ctrl_pressed:

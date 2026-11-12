@@ -35,17 +35,23 @@ var _project: Project
 func attach_project(project: Project):
 	if _project and _project.new_current_page.is_connected(_update_view):
 		_project.new_current_page.disconnect(_update_view)
+	if _project and _project.undo_redo.version_changed.is_connected(update_undo_redo_buttons):
+		_project.undo_redo.version_changed.disconnect(update_undo_redo_buttons)
 
 	_project = project
 
 	if _project:
 		_project.new_current_page.connect(_update_view)
 		_project.undo_redo.version_changed.connect(update_undo_redo_buttons)
+	update_undo_redo_buttons()
 
 func update_undo_redo_buttons() -> void:
 	if _project:
 		undo_button.disabled = not _project.undo_redo.has_undo()
 		redo_button.disabled = not _project.undo_redo.has_redo()
+	else:
+		undo_button.disabled = true
+		redo_button.disabled = true
 
 func _update_view(_page: Page) -> void:
 	framerate_slider.value = _project.framerate
@@ -73,8 +79,9 @@ func _on_play_pressed() -> void:
 
 
 func _on_slider_value_changed(value: float) -> void:
-	framerate_label.text = str(int(value))
-	_project.framerate = value
+	if _project:
+		framerate_label.text = str(int(value))
+		_project.framerate = value
 
 
 func _on_menu_button_pressed() -> void:

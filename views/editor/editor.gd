@@ -27,9 +27,7 @@ func _ready() -> void:
 	canvas.camera.touch_gesture_ended.connect(_on_touch_gesture_ended)
 
 	page_controls.menu_toggle.connect(edit_extras.open)
-	page_controls.play_toggle.connect(
-		func(): playback_manager.is_playing = !playback_manager.is_playing
-	)
+	page_controls.play_toggle.connect(playback_manager.toggle_playback_state)
 	page_controls.onion_skin_toggle.connect(canvas.toggle_onion_skin)
 	page_controls.undo_button.pressed.connect(undo)
 	page_controls.redo_button.pressed.connect(redo)
@@ -58,6 +56,10 @@ func load_project(p: Project) -> void:
 ## Loads in a blank project
 func unload_project() -> void:
 	playback_manager.pause()
+	current_page = null
+	touch_gesture_active = false
+	emulated_touch_pending = false
+	emulated_touch_stroke_active = false
 	load_project(null)
 
 ## Calls UndoRedo's Undo function.
@@ -81,7 +83,7 @@ func _input(event: InputEvent) -> void:
 
 func _handle_canvas_input(event: InputEvent) -> void:
 	if event is InputEventMouse:
-		var canvas_pos = canvas.dynamic_node.get_local_mouse_position()
+		var canvas_pos = canvas.get_project_mouse_position()
 		if event.device == InputEvent.DEVICE_ID_EMULATION:
 			_handle_emulated_touch_mouse(event, canvas_pos)
 			return
@@ -131,7 +133,7 @@ func _finish_emulated_touch_stroke(canvas_pos: Vector2) -> void:
 
 func _on_touch_gesture_started() -> void:
 	touch_gesture_active = true
-	_finish_emulated_touch_stroke(canvas.dynamic_node.get_local_mouse_position())
+	_finish_emulated_touch_stroke(canvas.get_project_mouse_position())
 
 
 func _on_touch_gesture_ended() -> void:

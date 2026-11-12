@@ -11,6 +11,7 @@ var _project: Project
 
 func attach_project(project: Project) -> void:
 	_project = project
+	render()
 
 
 func toggle() -> void:
@@ -55,4 +56,4 @@ func _add_frame(page: Page, opacity: float) -> void:
 func _clear_children() -> void:
 	for node in get_children():
 		remove_child(node)
-		node.queue_free()
+		node.free()

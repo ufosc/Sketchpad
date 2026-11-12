@@ -9,13 +9,15 @@ var height: int = 200
 
 
 func before_each():
-	var rs = RenderingServer
 	canvas = canvas_scene.instantiate()
 	add_child(canvas)
-	add_child(rs)
 	project = Project.new()
 	project.new_project(width, height)
 	canvas.attach_project(project)
+
+func after_each():
+	if is_instance_valid(canvas):
+		canvas.free()
 
 
 # -- Canvas Tests --
@@ -30,7 +32,7 @@ func test_canvas_render_page():
 
 
 func test_canvas_has_onion_skin_renderer():
-	var renderer = canvas.get_node("Control/OnionSkin")
+	var renderer = canvas.get_node("ProjectViewport/OnionSkin")
 	assert_not_null(renderer, "Canvas should have onion skin renderer node")
 
 

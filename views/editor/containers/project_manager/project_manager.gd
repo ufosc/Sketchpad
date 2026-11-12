@@ -20,21 +20,27 @@ func attach_project(project: Project) -> void:
 
 ## Saves the attached project to the filesystem.
 func save_project() -> void:
-	DirAccess.make_dir_absolute(Consts.PROJ_PATH)
-	_project.on_project_save()
-	ResourceSaver.save(
-		_project, "%s/%s.res" % [Consts.PROJ_PATH, _project.title], ResourceSaver.FLAG_COMPRESS
-	)
+	if _project:
+		DirAccess.make_dir_absolute(Consts.PROJ_PATH)
+		_project.on_project_save()
+		var save = ResourceSaver.save(
+			_project, "%s/%s.res" % [Consts.PROJ_PATH, _project.title], ResourceSaver.FLAG_COMPRESS
+		)
+		if save == OK:
+			Toast.show_message("Saved project %s!" % _project.title)
+		else:
+			Toast.show_message("Failed to save project %s!" % _project.title)
 
 
 func _on_text_changed(new_text: String) -> void:
-	if new_text:
-		_project.title = new_text
-	else:
-		_project.title = "New Animation"
+	if _project:
+		if new_text:
+			_project.title = new_text
+		else:
+			_project.title = "New Animation"
 
 
 func _on_menu_button_pressed() -> void:
+	await menu.open()
 	edit_extras.close()
 	editor.unload_project()
-	menu.open()

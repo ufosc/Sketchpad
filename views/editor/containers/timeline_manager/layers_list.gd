@@ -77,7 +77,14 @@ func set_data(pg: Page) -> void:
 	last_selected_index = -1
 
 	for i in range(displayed_page.layers.size()):
-		var cell := create_cell(pg.names[i], pg.layers[i], i)
+		var layer_name := "layer " + str(i)
+		if i < pg.names.size() and not pg.names[i].is_empty():
+			layer_name = pg.names[i]
+		if i >= pg.names.size():
+			pg.names.append(layer_name)
+		else:
+			pg.names[i] = layer_name
+		var cell := create_cell(layer_name, pg.layers[i], i)
 		grid.add_child(cell)
 
 
@@ -217,11 +224,14 @@ func copy() -> void:
 
 
 func paste(pasteboard: Array[Image], names: Array[String]) -> void:
-	if current_layer == -1:
+	if current_layer == -1 or pasteboard.is_empty():
 		return
 
 	for i in range(pasteboard.size() - 1, -1, -1):
-		displayed_page.insert_layer(current_layer + 1, pasteboard[i], names[i])
+		var layer_name := "layer " + str(current_layer + i + 1)
+		if i < names.size() and not names[i].is_empty():
+			layer_name = names[i]
+		displayed_page.insert_layer(current_layer + 1, pasteboard[i], layer_name)
 
 
 func cut() -> void:

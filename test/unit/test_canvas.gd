@@ -32,7 +32,7 @@ func test_canvas_render_page():
 
 
 func test_canvas_has_onion_skin_renderer():
-	var renderer = canvas.get_node("Control/OnionSkin")
+	var renderer = canvas.get_node("ProjectViewport/OnionSkin")
 	assert_not_null(renderer, "Canvas should have onion skin renderer node")
 
 

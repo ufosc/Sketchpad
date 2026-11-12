@@ -1,5 +1,6 @@
 [gd_resource type="Resource" script_class="Brush" format=3 uid="uid://b6nko3u31cspd"]
 
+[ext_resource type="Texture2D" uid="uid://ub6eu2lpgsw" path="res://tools/brush/cursor.png" id="1_20kja"]
 [ext_resource type="Script" uid="uid://bll2l6cggbn7b" path="res://tools/brush/brush.gd" id="1_aojua"]
 [ext_resource type="PackedScene" uid="uid://dm0t60quyv3bj" path="res://tools/brush/brush_menu.tscn" id="1_l7qst"]
 [ext_resource type="PackedScene" uid="uid://dxh6006utd0i0" path="res://tools/brush/brush_bar.tscn" id="2_20kja"]
@@ -11,6 +12,8 @@ script = ExtResource("1_aojua")
 original_stamp = ExtResource("3_sc16d")
 name = "Brush"
 icon = ExtResource("2_ntkw0")
+cursor = ExtResource("1_20kja")
+cursor_hotspot = Vector2(16, 16)
 handler = ExtResource("1_l7qst")
 handler_bar = ExtResource("2_20kja")
 metadata/_custom_type_script = "uid://bll2l6cggbn7b"

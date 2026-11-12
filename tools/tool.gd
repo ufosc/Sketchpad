@@ -5,6 +5,8 @@ signal settings_changed
 
 @export var name: String = "Base"
 @export var icon: Texture2D = PlaceholderTexture2D.new()
+@export var cursor: Texture2D
+@export var cursor_hotspot: Vector2 = Vector2.ZERO
 @export var handler: PackedScene
 @export var handler_bar: PackedScene
 

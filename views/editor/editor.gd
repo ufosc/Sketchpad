@@ -81,7 +81,7 @@ func _input(event: InputEvent) -> void:
 
 func _handle_canvas_input(event: InputEvent) -> void:
 	if event is InputEventMouse:
-		var canvas_pos = canvas.dynamic_node.get_local_mouse_position()
+		var canvas_pos = canvas.get_project_mouse_position()
 		if event.device == InputEvent.DEVICE_ID_EMULATION:
 			_handle_emulated_touch_mouse(event, canvas_pos)
 			return
@@ -131,7 +131,7 @@ func _finish_emulated_touch_stroke(canvas_pos: Vector2) -> void:
 
 func _on_touch_gesture_started() -> void:
 	touch_gesture_active = true
-	_finish_emulated_touch_stroke(canvas.dynamic_node.get_local_mouse_position())
+	_finish_emulated_touch_stroke(canvas.get_project_mouse_position())
 
 
 func _on_touch_gesture_ended() -> void:

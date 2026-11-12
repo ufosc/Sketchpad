@@ -26,13 +26,23 @@ offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Layers" type="Node2D" parent="Control" unique_id=760557918]
+[node name="ProjectRender" type="Sprite2D" parent="Control" unique_id=69548924]
 
-[node name="OnionSkin" type="Node2D" parent="Control" unique_id=290639511]
+[node name="ProjectViewport" type="SubViewport" parent="." unique_id=1006743526]
+transparent_bg = true
+canvas_item_default_texture_filter = 0
+render_target_update_mode = 4
+
+[node name="Layers" type="Node2D" parent="ProjectViewport" unique_id=760557918]
+position = Vector2(-20, -20)
+
+[node name="OnionSkin" type="Node2D" parent="ProjectViewport" unique_id=290639511]
+position = Vector2(-20, -20)
 script = ExtResource("3_onion")
 
-[node name="Dynamic" type="Node2D" parent="Control" unique_id=356778995]
+[node name="Dynamic" type="Node2D" parent="ProjectViewport" unique_id=356778995]
 z_index = 2
+position = Vector2(-20, -20)
 
 [node name="BakeViewport" type="SubViewport" parent="." unique_id=1325751403]
 transparent_bg = true

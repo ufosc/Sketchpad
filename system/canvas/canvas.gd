@@ -9,9 +9,12 @@ signal canvas_input(event: InputEvent)
 var _project: Project
 
 @onready var control_node: Control = $Control
-@onready var layers_node: Node2D = $Control/Layers
-@onready var onion_skin_renderer: OnionSkinRenderer = $Control/OnionSkin
-@onready var dynamic_node: Node2D = $Control/Dynamic
+@onready var layers_node: Node2D = $ProjectViewport/Layers
+@onready var onion_skin_renderer: OnionSkinRenderer = $ProjectViewport/OnionSkin
+@onready var dynamic_node: Node2D = $ProjectViewport/Dynamic
+
+@onready var project_viewport: Viewport = $ProjectViewport
+@onready var project_render: Sprite2D = $Control/ProjectRender
 
 @onready var bake_viewport: Viewport = $BakeViewport
 @onready var bake_node: Node2D = $BakeViewport/Bake
@@ -19,6 +22,9 @@ var _project: Project
 
 func _ready() -> void:
 	camera.movable = camera_movable
+	project_render.texture = project_viewport.get_texture()
+	project_render.centered = false
+	project_render.texture_filter = CanvasItem.TEXTURE_FILTER_NEAREST
 
 
 func attach_project(project: Project) -> void:
@@ -34,6 +40,22 @@ func attach_project(project: Project) -> void:
 		_project.new_current_page.connect(render_page)
 		_project.new_current_layer.connect(_update_dynamic)
 		onion_skin_renderer.attach_project(project)
+
+		var project_size := Vector2i(_project.width, _project.height)
+		project_viewport.size = project_size
+		control_node.size = Vector2(project_size)
+		control_node.position = -control_node.size / 2.0
+		project_render.texture = project_viewport.get_texture()
+
+		layers_node.position = Vector2.ZERO
+		onion_skin_renderer.position = Vector2.ZERO
+		dynamic_node.position = Vector2.ZERO
+
+		layers_node.scale = Vector2.ONE
+		onion_skin_renderer.scale = Vector2.ONE
+		dynamic_node.scale = Vector2.ONE
+
+		_update_dynamic(_project.current_layer)
 	else:
 		_clear_rendered_layers()
 		for node in dynamic_node.get_children():
@@ -65,6 +87,10 @@ func render_page(page: Page) -> void:
 		i += 3
 
 	onion_skin_renderer.render()
+
+
+func get_project_mouse_position() -> Vector2:
+	return control_node.get_local_mouse_position()
 
 
 func _clear_rendered_layers() -> void:

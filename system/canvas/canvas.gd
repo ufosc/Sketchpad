@@ -175,4 +175,4 @@ func _on_gui_input(event: InputEvent) -> void:
 
 
 func _update_dynamic(idx: int) -> void:
-	dynamic_node.z_index = idx + 2
+	dynamic_node.z_index = (idx * 3) + 2

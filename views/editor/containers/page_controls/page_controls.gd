@@ -73,9 +73,10 @@ func _on_play_pressed() -> void:
 	is_playing = !is_playing
 	play_toggle.emit(is_playing)
 
+
+func update_play_state(is_playing: bool) -> void:
+	self.is_playing = is_playing
 	play_button.icon = pause_icon if is_playing else play_icon
-	next_page_button.disabled = !next_page_button.disabled
-	prev_page_button.disabled = !prev_page_button.disabled
 
 
 func _on_slider_value_changed(value: float) -> void:

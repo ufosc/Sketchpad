@@ -1,0 +1,7 @@
+[gd_resource type="Shortcut" format=3 uid="uid://dsq3samhusig2"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_yykre"]
+action = &"onion"
+
+[resource]
+events = [SubResource("InputEventAction_yykre")]

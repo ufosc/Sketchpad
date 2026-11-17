@@ -1,0 +1,7 @@
+[gd_resource type="Shortcut" format=3 uid="uid://cjmvboxnsr66i"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_71kj2"]
+action = &"save"
+
+[resource]
+events = [SubResource("InputEventAction_71kj2")]

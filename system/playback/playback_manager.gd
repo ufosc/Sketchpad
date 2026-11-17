@@ -1,6 +1,8 @@
 class_name PlaybackManager
 extends Node
 
+signal playback_state_changed(is_playing: bool)
+
 var is_playing: bool = false
 
 var audio_stream_player: AudioStreamPlayer
@@ -40,6 +42,7 @@ func pause() -> void:
 
 ## Toggles the playback state of the assigned project.
 func toggle_playback_state(new_play_state: bool) -> void:
+	playback_state_changed.emit(new_play_state)
 	if new_play_state:
 		play()
 	else:

@@ -5,9 +5,16 @@
 [ext_resource type="Texture2D" uid="uid://tj0acwcjmc3d" path="res://assets/icons/onion_toggle_on.png" id="3_ghtc8"]
 [ext_resource type="Texture2D" uid="uid://c1f6ymgs25wm6" path="res://assets/icons/pause.png" id="3_n0t25"]
 [ext_resource type="Texture2D" uid="uid://cdbtw7ibiq52k" path="res://assets/icons/onion_toggle_off.png" id="5_cwjua"]
+[ext_resource type="Shortcut" uid="uid://cvt4snvegdste" path="res://assets/shortcuts/menu_shortcut.tres" id="5_hn1dp"]
 [ext_resource type="Texture2D" uid="uid://bo6450wp8v5ys" path="res://assets/icons/prev.png" id="5_ndc2b"]
 [ext_resource type="Texture2D" uid="uid://nkhgmk04wfwa" path="res://assets/icons/menu.png" id="5_sacgt"]
 [ext_resource type="Texture2D" uid="uid://bm42d8abqehv6" path="res://assets/icons/next.png" id="6_sacgt"]
+[ext_resource type="Shortcut" uid="uid://b4se22t5b3dbr" path="res://assets/shortcuts/prev_shortcut.tres" id="7_2cg13"]
+[ext_resource type="Shortcut" uid="uid://bjd6qy7x6h2h0" path="res://assets/shortcuts/play_shortcut.tres" id="9_hwf87"]
+[ext_resource type="Shortcut" uid="uid://c72ksrt2ee4hy" path="res://assets/shortcuts/next_shortcut.tres" id="10_yotpr"]
+[ext_resource type="Shortcut" uid="uid://5yjf4rp1eeix" path="res://assets/shortcuts/undo_shortcut.tres" id="12_hwf87"]
+[ext_resource type="Shortcut" uid="uid://dsq3samhusig2" path="res://assets/shortcuts/onion_shortcut.tres" id="12_jjocj"]
+[ext_resource type="Shortcut" uid="uid://dyyvluqimfj2i" path="res://assets/shortcuts/redo_shortcut.tres" id="13_yotpr"]
 
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_n0t25"]
 load_path = "res://.godot/imported/onion_toggle_on.png-3dfa22c207c5fbf49afecf79c6c04145.ctex"
@@ -66,6 +73,7 @@ custom_minimum_size = Vector2(48, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 tooltip_text = "Menu"
+shortcut = ExtResource("5_hn1dp")
 icon = ExtResource("5_sacgt")
 icon_alignment = 1
 expand_icon = true
@@ -79,6 +87,7 @@ alignment = 1
 custom_minimum_size = Vector2(48, 0)
 layout_mode = 2
 tooltip_text = "Go to Previous Frame"
+shortcut = ExtResource("7_2cg13")
 icon = ExtResource("5_ndc2b")
 icon_alignment = 1
 expand_icon = true
@@ -87,6 +96,7 @@ expand_icon = true
 custom_minimum_size = Vector2(48, 0)
 layout_mode = 2
 tooltip_text = "Play/Pause Animation"
+shortcut = ExtResource("9_hwf87")
 icon = ExtResource("2_twh24")
 icon_alignment = 1
 expand_icon = true
@@ -95,6 +105,7 @@ expand_icon = true
 custom_minimum_size = Vector2(48, 0)
 layout_mode = 2
 tooltip_text = "Go to Next Frame"
+shortcut = ExtResource("10_yotpr")
 icon = ExtResource("6_sacgt")
 icon_alignment = 1
 expand_icon = true
@@ -114,6 +125,7 @@ custom_minimum_size = Vector2(48, 0)
 layout_mode = 2
 tooltip_text = "Undo the Previous Action"
 disabled = true
+shortcut = ExtResource("12_hwf87")
 icon = ExtResource("5_ndc2b")
 icon_alignment = 1
 expand_icon = true
@@ -123,6 +135,7 @@ custom_minimum_size = Vector2(48, 0)
 layout_mode = 2
 tooltip_text = "Redo the Previous Action"
 disabled = true
+shortcut = ExtResource("13_yotpr")
 icon = ExtResource("6_sacgt")
 icon_alignment = 1
 expand_icon = true
@@ -154,6 +167,7 @@ custom_minimum_size = Vector2(48, 0)
 layout_mode = 2
 tooltip_text = "Toggle Onion Skin"
 toggle_mode = true
+shortcut = ExtResource("12_jjocj")
 icon = ExtResource("3_ghtc8")
 icon_alignment = 1
 expand_icon = true

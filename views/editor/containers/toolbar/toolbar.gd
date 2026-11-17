@@ -14,6 +14,9 @@ func _ready() -> void:
 		button.icon_alignment = HORIZONTAL_ALIGNMENT_CENTER
 		button.expand_icon = true
 		button.custom_minimum_size = Vector2(32, 32)
+		if tool.shortcut:
+			button.shortcut = tool.shortcut
+		button.tooltip_text = tool.name
 		button.connect("pressed", Callable(self, "_tool_selected").bind(tool))
 		toolstrip.add_child(button)
 

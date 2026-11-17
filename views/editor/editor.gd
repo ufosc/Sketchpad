@@ -26,11 +26,12 @@ func _ready() -> void:
 	canvas.camera.touch_gesture_started.connect(_on_touch_gesture_started)
 	canvas.camera.touch_gesture_ended.connect(_on_touch_gesture_ended)
 
-	page_controls.menu_toggle.connect(edit_extras.open)
+	page_controls.menu_toggle.connect(edit_extras.toggle)
 	page_controls.play_toggle.connect(playback_manager.toggle_playback_state)
 	page_controls.onion_skin_toggle.connect(canvas.toggle_onion_skin)
 	page_controls.undo_button.pressed.connect(undo)
 	page_controls.redo_button.pressed.connect(redo)
+	playback_manager.playback_state_changed.connect(page_controls.update_play_state)
 	tool_changed.connect(canvas.set_tool_cursor)
 	canvas.set_tool_cursor(current_tool)
 
@@ -72,14 +73,6 @@ func undo() -> void:
 func redo() -> void:
 	if project and project.undo_redo.has_redo():
 		project.undo_redo.redo()
-
-
-func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("undo"):
-		undo()
-	elif event.is_action_pressed("redo"):
-		redo()
-
 
 func _handle_canvas_input(event: InputEvent) -> void:
 	if event is InputEventMouse:

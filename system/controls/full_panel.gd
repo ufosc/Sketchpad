@@ -26,3 +26,11 @@ func close():
 		await tween.finished
 
 		visible = false
+
+
+## Toggles the full panel open or closed.
+func toggle():
+	if visible:
+		close()
+	else:
+		open()

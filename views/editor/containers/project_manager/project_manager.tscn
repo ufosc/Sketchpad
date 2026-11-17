@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://42u35o2152du"]
 
 [ext_resource type="Script" uid="uid://fav3x01dk02o" path="res://views/editor/containers/project_manager/project_manager.gd" id="1_ef47v"]
+[ext_resource type="Shortcut" uid="uid://cjmvboxnsr66i" path="res://assets/shortcuts/save_shortcut.tres" id="2_3e2wb"]
 [ext_resource type="Texture2D" uid="uid://pm0mxupeviek" path="res://assets/icons/save.png" id="2_h4php"]
 [ext_resource type="Texture2D" uid="uid://cpybsyofujobm" path="res://assets/icons/close.png" id="3_3e2wb"]
 
@@ -40,6 +41,7 @@ alignment = 1
 [node name="SaveButton" type="Button" parent="VBoxContainer/HBoxContainer" unique_id=832323983]
 custom_minimum_size = Vector2(0, 64)
 layout_mode = 2
+shortcut = ExtResource("2_3e2wb")
 text = "Save Project"
 icon = ExtResource("2_h4php")
 icon_alignment = 1

@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dxh6006utd0i0" path="res://tools/brush/brush_bar.tscn" id="2_20kja"]
 [ext_resource type="Texture2D" uid="uid://5lqc1w65yk6w" path="res://assets/icons/edit.png" id="2_ntkw0"]
 [ext_resource type="Texture2D" uid="uid://cfk507ghqjsck" path="res://assets/brush_templates/big_circle.png" id="3_sc16d"]
+[ext_resource type="Shortcut" uid="uid://chhmh1mosc8xy" path="res://assets/shortcuts/brush_shortcut.tres" id="7_fli3i"]
 
 [resource]
 script = ExtResource("1_aojua")
@@ -16,4 +17,5 @@ cursor = ExtResource("1_20kja")
 cursor_hotspot = Vector2(16, 16)
 handler = ExtResource("1_l7qst")
 handler_bar = ExtResource("2_20kja")
+shortcut = ExtResource("7_fli3i")
 metadata/_custom_type_script = "uid://bll2l6cggbn7b"

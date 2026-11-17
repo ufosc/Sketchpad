@@ -1,0 +1,7 @@
+[gd_resource type="Shortcut" format=3 uid="uid://chhmh1mosc8xy"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_yjkiu"]
+action = &"brush"
+
+[resource]
+events = [SubResource("InputEventAction_yjkiu")]

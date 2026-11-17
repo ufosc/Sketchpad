@@ -1,0 +1,7 @@
+[gd_resource type="Shortcut" format=3 uid="uid://dyyvluqimfj2i"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_vlfhy"]
+action = &"redo"
+
+[resource]
+events = [SubResource("InputEventAction_vlfhy")]

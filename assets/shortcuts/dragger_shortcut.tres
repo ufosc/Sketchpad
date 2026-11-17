@@ -1,0 +1,7 @@
+[gd_resource type="Shortcut" format=3 uid="uid://bk5bxu2pisv1d"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_ceqcj"]
+action = &"dragger"
+
+[resource]
+events = [SubResource("InputEventAction_ceqcj")]

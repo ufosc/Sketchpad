@@ -1,0 +1,7 @@
+[gd_resource type="Shortcut" format=3 uid="uid://5yjf4rp1eeix"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_p2cw3"]
+action = &"undo"
+
+[resource]
+events = [SubResource("InputEventAction_p2cw3")]

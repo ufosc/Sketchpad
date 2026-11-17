@@ -9,6 +9,7 @@ signal settings_changed
 @export var cursor_hotspot: Vector2 = Vector2.ZERO
 @export var handler: PackedScene
 @export var handler_bar: PackedScene
+@export var shortcut: Shortcut
 
 
 ## Triggers when the pointer is pressed down on the canvas. [br]

@@ -1,0 +1,7 @@
+[gd_resource type="Shortcut" format=3 uid="uid://ci2b1a4o1w7es"]
+
+[sub_resource type="InputEventAction" id="InputEventAction_nvhqw"]
+action = &"eraser"
+
+[resource]
+events = [SubResource("InputEventAction_nvhqw")]

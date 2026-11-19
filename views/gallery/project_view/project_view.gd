@@ -82,7 +82,7 @@ func export_project() -> void:
 ## Removes the project from the SketchpadProjects directory.
 func delete_project() -> void:
 	OptionDialog.ask(
-		"Warning", "This will delete the project!\nDo you want to delete this project?"
+		"Delete", "Do you want to delete this project?", "Delete", "Cancel", true
 	)
 	if await OptionDialog.closed:
 		DirAccess.remove_absolute("%s/%s.res" % [Consts.PROJ_PATH, _project.title])

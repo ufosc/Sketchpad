@@ -1,6 +1,9 @@
 ![Sketchpad Logo](assets/icons/icon_128.png)
 # Sketchpad
 ## [Use Online](https://ufosc.github.io/Sketchpad/)
+
+Try the latest pre-release build at [Nightly](https://ufosc.github.io/Sketchpad/nightly/).
+
 Animate like it's 2009!
 
 Modeled after old handheld animation tools, Sketchpad is meant to be fun and easy to use!
@@ -13,7 +16,7 @@ Modeled after old handheld animation tools, Sketchpad is meant to be fun and eas
 * Powered by Godot 4.7 for lightweight performance on any device.
 
 ## Installation
-The easiest way to try Sketchpad is through the [PWA](https://ufosc.github.io/Sketchpad/), as it is cross-platform and updates automatically.
+The easiest way to try the release-ready version of Sketchpad is through the [PWA](https://ufosc.github.io/Sketchpad/), as it is cross-platform and updates automatically. For the latest pre-release build, use the [nightly PWA](https://ufosc.github.io/Sketchpad/nightly/).
 
 If you want to use native builds of Sketchpad, feel free to download it from the [releases](../../releases/latest) page.
 
